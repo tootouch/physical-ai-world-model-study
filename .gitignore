@@ -1,4 +1,7 @@
 .mkdocs_deps/
+.venv/
+.uv-cache/
+.uv-python/
 site/
 .cache/
 .DS_Store

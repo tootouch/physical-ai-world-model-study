@@ -1,75 +1,108 @@
-# Curated Paper Notes Index
+# Paper Collections
 
-이 폴더는 자동 생성본(`paper_corpus/paper_notes`)을 바탕으로 논문을 하나씩 다시 읽고 정리한 curated note를 모아두는 공간이다.
+This page reorganizes the curated notes as a reading system rather than a flat file list. Each note contains a short glossary, paper metadata, figure references, equations or notation where relevant, key findings, limitations, and discussion points.
 
-자동 생성본은 전체 논문을 빠르게 훑기 위한 초안이고, curated note는 발표 자료에 바로 활용할 수 있도록 원문, figure, 수식/정의, 결과표, 한계, 후속 연구 연결을 사람이 확인해 정리한다.
+<div class="collection-overview">
+  <div><strong>59</strong><span>notes</span></div>
+  <div><strong>8</strong><span>collections</span></div>
+  <div><strong>30</strong><span>study sessions</span></div>
+</div>
 
-| ID | Title | Status | Note |
-|---|---|---|---|
-| `G4` | RT-1: Robotics Transformer for Real-World Control at Scale | curated | [G4.md](G4.md) |
-| `G6` | RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control | curated | [G6.md](G6.md) |
-| `G5` | PaLM-E: An Embodied Multimodal Language Model | curated | [G5.md](G5.md) |
-| `G1` | A Generalist Agent | curated | [G1.md](G1.md) |
-| `G2` | Do As I Can, Not As I Say: Grounding Language in Robotic Affordances | curated | [G2.md](G2.md) |
-| `G3` | VIMA: General Robot Manipulation with Multimodal Prompts | curated | [G3.md](G3.md) |
-| `D1` | Open X-Embodiment: Robotic Learning Datasets and RT-X Models | curated | [D1.md](D1.md) |
-| `D5` | OpenVLA: An Open-Source Vision-Language-Action Model | curated | [D5.md](D5.md) |
-| `P1` | Diffusion Policy: Visuomotor Policy Learning via Action Diffusion | curated | [P1.md](P1.md) |
-| `P2` | 3D Diffusion Policy: Generalizable Visuomotor Policy Learning via Simple 3D Representations | curated | [P2.md](P2.md) |
-| `P3` | RDT-1B: a Diffusion Foundation Model for Bimanual Manipulation | curated | [P3.md](P3.md) |
-| `P4` | pi0: A Vision-Language-Action Flow Model for General Robot Control | curated | [P4.md](P4.md) |
-| `P5` | pi0.5: a Vision-Language-Action Model with Open-World Generalization | curated | [P5.md](P5.md) |
-| `P6` | GR00T N1: An Open Foundation Model for Generalist Humanoid Robots | curated | [P6.md](P6.md) |
-| `D2` | Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware | curated | [D2.md](D2.md) |
-| `D3` | DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset | curated | [D3.md](D3.md) |
-| `D4` | Octo: An Open-Source Generalist Robot Policy | curated | [D4.md](D4.md) |
-| `D6` | X-VLA: Soft-Prompted Transformer as Scalable Cross-Embodiment Vision-Language-Action Model | curated | [D6.md](D6.md) |
-| `D7` | Pretrained Vision-Language-Action Models are Surprisingly Resistant to Forgetting in Continual Learning | curated | [D7.md](D7.md) |
-| `V1` | CogACT: A Foundational Vision-Language-Action Model for Synergizing Cognition and Action in Robotic Manipulation | curated | [V1.md](V1.md) |
-| `V2` | Diffusion-VLA: Generalizable and Interpretable Robot Foundation Model via Self-Generated Reasoning | curated | [V2.md](V2.md) |
-| `V3` | CoT-VLA: Visual Chain-of-Thought Reasoning for Vision-Language-Action Models | curated | [V3.md](V3.md) |
-| `V4` | SpatialVLA: Exploring Spatial Representations for Visual-Language-Action Model | curated | [V4.md](V4.md) |
-| `V5` | RoboMamba: Efficient Vision-Language-Action Model for Robotic Reasoning and Manipulation | curated | [V5.md](V5.md) |
-| `V6` | RoboBrain: A Unified Brain Model for Robotic Manipulation from Abstract to Concrete | curated | [V6.md](V6.md) |
-| `V7` | Gemini Robotics: Bringing AI into the Physical World | curated | [V7.md](V7.md) |
-| `V8` | PhysVLM: Enabling Visual Language Models to Understand Robotic Physical Reachability | curated | [V8.md](V8.md) |
-| `W1` | The free-energy principle: a unified brain theory? | curated | [W1.md](W1.md) |
-| `W2` | DreamerV3: Mastering Diverse Control Tasks through World Models | curated | [W2.md](W2.md) |
-| `W3` | Training Agents Inside of Scalable World Models | curated | [W3.md](W3.md) |
-| `W4` | Genie: Generative Interactive Environments | curated | [W4.md](W4.md) |
-| `W5` | Genie 2: A large-scale foundation world model | curated | [W5.md](W5.md) |
-| `W6` | Pandora: Towards General World Model with Natural Language Actions and Video States | curated | [W6.md](W6.md) |
-| `W7` | LLMR: Real-time Prompting of Interactive Worlds using Large Language Models | curated | [W7.md](W7.md) |
-| `W8` | Learning Interactive Real-World Simulators | curated | [W8.md](W8.md) |
-| `W9` | GAIA-1: A Generative World Model for Autonomous Driving | curated | [W9.md](W9.md) |
-| `W10` | DreamGen: Unlocking Generalization in Robot Learning through Video World Models | curated | [W10.md](W10.md) |
-| `W11` | World Simulation with Video Foundation Models for Physical AI | curated | [W11.md](W11.md) |
-| `W12` | World Action Models are Zero-shot Policies | curated | [W12.md](W12.md) |
-| `S1` | A Survey on Robotics with Foundation Models: toward Embodied AI | curated | [S1.md](S1.md) |
-| `S2` | A Survey on Vision-Language-Action Models for Embodied AI | curated | [S2.md](S2.md) |
-| `S3` | Embodied AI Agents: Modeling the World | curated | [S3.md](S3.md) |
-| `S4` | A Comprehensive Survey on World Models for Embodied AI | curated | [S4.md](S4.md) |
-| `S5` | An Anatomy of Vision-Language-Action Models: From Modules to Milestones and Challenges | curated | [S5.md](S5.md) |
-| `E1` | SAM-6D: Segment Anything Model Meets Zero-Shot 6D Object Pose Estimation | curated | [E1.md](E1.md) |
-| `E2` | Code-as-Monitor: Constraint-aware Visual Programming for Reactive and Proactive Robotic Failure Detection | curated | [E2.md](E2.md) |
-| `E3` | RoboArena: Distributed Real-World Evaluation of Generalist Robot Policies | curated | [E3.md](E3.md) |
-| `E4` | LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning | curated | [E4.md](E4.md) |
-| `E5` | Why learn if you can infer? Robot arm control with Hierarchical Active Inference | curated | [E5.md](E5.md) |
-| `A1` | ProAgent: Building Proactive Cooperative Agents with Large Language Models | curated | [A1.md](A1.md) |
-| `A2` | REVECA: Adaptive Planning and Trajectory-Based Validation in Cooperative Language Agents | curated | [A2.md](A2.md) |
-| `A3` | On the Resilience of LLM-Based Multi-Agent Collaboration with Faulty Agents | curated | [A3.md](A3.md) |
-| `A4` | Synergistic Multi-Agent Framework with Trajectory Learning for Knowledge-Intensive Tasks | curated | [A4.md](A4.md) |
-| `A5` | BotSim: LLM-Powered Malicious Social Botnet Simulation | curated | [A5.md](A5.md) |
-| `A6` | Debate on Graph: A Flexible and Reliable Reasoning Framework for Large Language Models | curated | [A6.md](A6.md) |
-| `A7` | RADiT: Resource Allocation in Digital Twin-Driven UAV-Aided Internet of Vehicle Networks | curated | [A7.md](A7.md) |
-| `A8` | Foundation Models for Generalist Medical Artificial Intelligence | curated | [A8.md](A8.md) |
-| `A9` | From Wearable Sensor Data to Digital Biomarker Development | curated | [A9.md](A9.md) |
-| `A10` | A Multimodal Sleep Foundation Model for Disease Prediction | curated | [A10.md](A10.md) |
+## Survey
 
-## 작업 방식
+<div class="paper-grid compact">
+  <a href="S1.md"><b>S1</b><span>Robotics with Foundation Models</span></a>
+  <a href="S2.md"><b>S2</b><span>Vision-Language-Action Survey</span></a>
+  <a href="S3.md"><b>S3</b><span>Embodied AI Agents</span></a>
+  <a href="S4.md"><b>S4</b><span>World Models for Embodied AI</span></a>
+  <a href="S5.md"><b>S5</b><span>Anatomy of VLA Models</span></a>
+</div>
 
-1. 자동 note에서 metadata, figure crop, equation/formula 후보를 확인한다.
-2. 원문 PDF/text에서 abstract, method, experiment, limitation을 직접 확인한다.
-3. 발표에 쓸 핵심 figure와 수식/정의를 선별한다.
-4. 논문별 curated note를 `paper_notes_curated/{ID}.md`로 작성한다.
-5. 이 index에 작업 상태를 추가한다.
+## Generalist & VLA Foundations
+
+<div class="paper-grid">
+  <a href="G1.md"><b>G1</b><span>A Generalist Agent</span></a>
+  <a href="G2.md"><b>G2</b><span>SayCan</span></a>
+  <a href="G3.md"><b>G3</b><span>VIMA</span></a>
+  <a href="G4.md"><b>G4</b><span>RT-1</span></a>
+  <a href="G5.md"><b>G5</b><span>PaLM-E</span></a>
+  <a href="G6.md"><b>G6</b><span>RT-2</span></a>
+</div>
+
+## Robot Data & Open Policies
+
+<div class="paper-grid">
+  <a href="D1.md"><b>D1</b><span>Open X-Embodiment / RT-X</span></a>
+  <a href="D2.md"><b>D2</b><span>ALOHA / ACT</span></a>
+  <a href="D3.md"><b>D3</b><span>DROID</span></a>
+  <a href="D4.md"><b>D4</b><span>Octo</span></a>
+  <a href="D5.md"><b>D5</b><span>OpenVLA</span></a>
+  <a href="D6.md"><b>D6</b><span>X-VLA</span></a>
+  <a href="D7.md"><b>D7</b><span>Continual VLA</span></a>
+</div>
+
+## Robot Foundation Policies
+
+<div class="paper-grid">
+  <a href="P1.md"><b>P1</b><span>Diffusion Policy</span></a>
+  <a href="P2.md"><b>P2</b><span>3D Diffusion Policy</span></a>
+  <a href="P3.md"><b>P3</b><span>RDT-1B</span></a>
+  <a href="P4.md"><b>P4</b><span>pi0</span></a>
+  <a href="P5.md"><b>P5</b><span>pi0.5</span></a>
+  <a href="P6.md"><b>P6</b><span>GR00T N1</span></a>
+</div>
+
+## VLA Reasoning & Physical Grounding
+
+<div class="paper-grid">
+  <a href="V1.md"><b>V1</b><span>CogACT</span></a>
+  <a href="V2.md"><b>V2</b><span>Diffusion-VLA</span></a>
+  <a href="V3.md"><b>V3</b><span>CoT-VLA</span></a>
+  <a href="V4.md"><b>V4</b><span>SpatialVLA</span></a>
+  <a href="V5.md"><b>V5</b><span>RoboMamba</span></a>
+  <a href="V6.md"><b>V6</b><span>RoboBrain</span></a>
+  <a href="V7.md"><b>V7</b><span>Gemini Robotics</span></a>
+  <a href="V8.md"><b>V8</b><span>PhysVLM</span></a>
+</div>
+
+## World Models
+
+<div class="paper-grid">
+  <a href="W1.md"><b>W1</b><span>Free-Energy Principle</span></a>
+  <a href="W2.md"><b>W2</b><span>DreamerV3</span></a>
+  <a href="W3.md"><b>W3</b><span>Scalable World Models</span></a>
+  <a href="W4.md"><b>W4</b><span>Genie</span></a>
+  <a href="W5.md"><b>W5</b><span>Genie 2</span></a>
+  <a href="W6.md"><b>W6</b><span>Pandora</span></a>
+  <a href="W7.md"><b>W7</b><span>LLMR</span></a>
+  <a href="W8.md"><b>W8</b><span>UniSim</span></a>
+  <a href="W9.md"><b>W9</b><span>GAIA-1</span></a>
+  <a href="W10.md"><b>W10</b><span>DreamGen</span></a>
+  <a href="W11.md"><b>W11</b><span>Cosmos</span></a>
+  <a href="W12.md"><b>W12</b><span>World Action Models</span></a>
+</div>
+
+## Safety, Evaluation & Applications
+
+<div class="paper-grid">
+  <a href="E1.md"><b>E1</b><span>SAM-6D</span></a>
+  <a href="E2.md"><b>E2</b><span>Code-as-Monitor</span></a>
+  <a href="E3.md"><b>E3</b><span>RoboArena</span></a>
+  <a href="E4.md"><b>E4</b><span>LIBERO</span></a>
+  <a href="E5.md"><b>E5</b><span>Hierarchical Active Inference</span></a>
+  <a href="A7.md"><b>A7</b><span>RADiT</span></a>
+  <a href="A8.md"><b>A8</b><span>Generalist Medical AI</span></a>
+  <a href="A9.md"><b>A9</b><span>Wearable Biomarkers</span></a>
+  <a href="A10.md"><b>A10</b><span>SleepFM</span></a>
+</div>
+
+## Multi-Agent Systems
+
+<div class="paper-grid compact">
+  <a href="A1.md"><b>A1</b><span>ProAgent</span></a>
+  <a href="A2.md"><b>A2</b><span>REVECA</span></a>
+  <a href="A3.md"><b>A3</b><span>Multi-Agent Resilience</span></a>
+  <a href="A4.md"><b>A4</b><span>Synergistic MAS</span></a>
+  <a href="A5.md"><b>A5</b><span>BotSim</span></a>
+  <a href="A6.md"><b>A6</b><span>Debate on Graph</span></a>
+</div>

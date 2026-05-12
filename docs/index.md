@@ -1,69 +1,94 @@
-<section class="hero">
-  <div class="hero__eyebrow">Paper Study Archive</div>
-  <h1>Physical AI &<br>World Model Study</h1>
+<section class="landing-cover">
+  <div class="landing-cover__meta">Curated Reading System / 2026</div>
+  <h1>Physical AI<br>& World Models</h1>
   <p>
-    Robotics foundation models, VLA, embodied reasoning, video world models,
-    evaluation, safety, and deployment-oriented applications.
+    A structured study archive for robotics foundation models, vision-language-action systems,
+    embodied reasoning, video world models, safety, evaluation, and deployment-oriented applications.
   </p>
-  <div class="hero__actions">
-    <a class="hero__button hero__button--primary" href="integrated/">Start Reading</a>
-    <a class="hero__button" href="papers/">Browse Papers</a>
+  <div class="landing-cover__links">
+    <a href="integrated/">Integrated Guide</a>
+    <a href="papers/">Paper Collections</a>
+    <a href="curriculum/">Curriculum</a>
   </div>
 </section>
 
-<div class="stat-grid">
-  <div class="stat-card">
-    <span class="stat-card__value">59</span>
-    <span class="stat-card__label">Curated papers</span>
+<section class="brief">
+  <div>
+    <span class="brief__number">59</span>
+    <span class="brief__label">curated papers</span>
   </div>
-  <div class="stat-card">
-    <span class="stat-card__value">30</span>
-    <span class="stat-card__label">Study sessions</span>
+  <div>
+    <span class="brief__number">30</span>
+    <span class="brief__label">study sessions</span>
   </div>
-  <div class="stat-card">
-    <span class="stat-card__value">7</span>
-    <span class="stat-card__label">Reading phases</span>
+  <div>
+    <span class="brief__number">7</span>
+    <span class="brief__label">reading phases</span>
   </div>
-  <div class="stat-card">
-    <span class="stat-card__value">2026</span>
-    <span class="stat-card__label">Updated corpus</span>
+  <div>
+    <span class="brief__number">1</span>
+    <span class="brief__label">integrated field guide</span>
   </div>
-</div>
+</section>
 
-## Explore
+## Reading System
 
-<div class="link-grid">
-  <a class="link-card" href="integrated/">
+<div class="feature-grid">
+  <a class="feature-card feature-card--wide" href="integrated/">
+    <span>01</span>
     <strong>Integrated Guide</strong>
-    <span>Research flow, metadata, and curriculum in one document.</span>
+    <p>Read the field narrative, metadata, and curriculum from one connected document.</p>
   </a>
-  <a class="link-card" href="curriculum/">
-    <strong>Study Curriculum</strong>
-    <span>15 weeks and 30 presentation sessions with reading goals.</span>
+  <a class="feature-card" href="related_works/">
+    <span>02</span>
+    <strong>Research Flow</strong>
+    <p>Understand how Physical AI and World Model research evolved across major threads.</p>
   </a>
-  <a class="link-card" href="related_works/">
-    <strong>Related Works</strong>
-    <span>A narrative map of Physical AI and World Models.</span>
+  <a class="feature-card" href="papers/">
+    <span>03</span>
+    <strong>Paper Collections</strong>
+    <p>Move through the corpus by survey, VLA, robot data, policy, world model, and evaluation.</p>
   </a>
-  <a class="link-card" href="metadata/">
-    <strong>Paper Metadata</strong>
-    <span>Titles, authors, venues, dates, and source links.</span>
+  <a class="feature-card" href="curriculum/">
+    <span>04</span>
+    <strong>Study Plan</strong>
+    <p>Use the 15-week / 30-session curriculum to organize presentations and discussion.</p>
   </a>
-  <a class="link-card" href="papers/">
-    <strong>Paper Notes</strong>
-    <span>Figures, equations, notation, limitations, and discussion points.</span>
-  </a>
-  <a class="link-card" href="corpus/download_extract_status/">
-    <strong>Corpus Status</strong>
-    <span>Download and extraction status for source materials.</span>
+  <a class="feature-card" href="metadata/">
+    <span>05</span>
+    <strong>Metadata</strong>
+    <p>Look up title, author, venue, date, affiliation, and source link for each paper.</p>
   </a>
 </div>
 
-## Suggested Route
+## Reading Map
 
-<div class="route">
-  <div><span>01</span> Read the field map in <a href="related_works/">Related Works</a>.</div>
-  <div><span>02</span> Follow the reading order in the <a href="integrated/">Integrated Guide</a>.</div>
-  <div><span>03</span> Open each paper note and review glossary, figures, equations, and takeaways.</div>
-  <div><span>04</span> Use the <a href="curriculum/">Curriculum</a> to prepare session-level presentations.</div>
+<div class="timeline">
+  <a href="papers/#survey">Survey</a>
+  <a href="papers/#generalist-vla-foundations">Generalist & VLA</a>
+  <a href="papers/#robot-data-open-policies">Robot Data</a>
+  <a href="papers/#robot-foundation-policies">Foundation Policy</a>
+  <a href="papers/#vla-reasoning-physical-grounding">Reasoning</a>
+  <a href="papers/#world-models">World Models</a>
+  <a href="papers/#safety-evaluation-applications">Evaluation</a>
+</div>
+
+## How To Use This Site
+
+<div class="note-layout">
+  <div>
+    <h3>For first-pass reading</h3>
+    <p>
+      Start with <a href="related_works/">Related Works</a>, then follow the reading order in
+      the <a href="integrated/">Integrated Guide</a>. Each paper note begins with a glossary so
+      abbreviations do not interrupt the reading flow.
+    </p>
+  </div>
+  <div>
+    <h3>For presentation prep</h3>
+    <p>
+      Use <a href="curriculum/">Curriculum</a> for session goals, then open the corresponding
+      paper notes for figures, equations, notation, limitations, and discussion prompts.
+    </p>
+  </div>
 </div>

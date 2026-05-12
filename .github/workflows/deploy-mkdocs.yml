@@ -21,8 +21,11 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: uv sync --locked
 
       - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force
+        run: uv run mkdocs gh-deploy --force

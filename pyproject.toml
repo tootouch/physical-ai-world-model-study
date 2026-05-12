@@ -1,0 +1,14 @@
+[project]
+name = "physical-ai-world-model-study"
+version = "0.1.0"
+description = "MkDocs site for Physical AI and World Model study notes."
+requires-python = ">=3.9"
+dependencies = [
+  "mkdocs-material>=9.7.6",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+package = false
