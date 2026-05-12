@@ -1,7 +1,7 @@
 # Physical AI & World Model 스터디 커리큘럼
 
 작성일: 2026-05-08  
-대상: DSBA 연구실 / 산업공학과 기반 AI 스터디  
+대상: Physical AI & World Model 스터디  
 구성: 15주, 주 2회 발표, 총 30회 발표
 
 ---
@@ -50,7 +50,7 @@
 | VLM이 보는 것과 로봇이 할 수 있는 것은 왜 다른가? | perception-action gap |
 | world model은 시뮬레이터인가, 정책인가, 아니면 둘 사이의 인터페이스인가? | world model의 역할 |
 | 데이터가 많아지면 로봇도 LLM처럼 일반화되는가? | scaling hypothesis |
-| 산업공학/DSBA 관점에서는 어디에서 가치를 만들 수 있는가? | 실험설계, 운영, 평가, 안전, digital twin |
+| 활용 관점에서는 어디에서 가치를 만들 수 있는가? | 실험설계, 운영, 평가, 안전, digital twin |
 
 ### 1.3 논문 간 연결을 명시한다
 
@@ -154,7 +154,7 @@
 | 7 | DROID/ALOHA: Data Collection and Teleoperation | `D2` DROID, `D3` ALOHA/ACT | real-world robot data collection과 low-cost teleoperation이 왜 중요한지 이해한다. | 좋은 robot dataset은 크기보다 다양성, 품질, task coverage 중 무엇이 더 중요한가? |
 | 8 | Octo/OpenVLA: Open Generalist Policies | `D4` Octo, `D5` OpenVLA | open-source generalist robot policy의 설계와 한계를 비교한다. | open VLA는 closed industrial VLA와 어떤 방식으로 경쟁하거나 보완할 수 있을까? |
 
-DSBA 관점: 데이터 수집 비용, task sampling, evaluation design, distribution shift는 산업공학적 실험설계와 매우 잘 맞는 문제다.
+활용 관점: 데이터 수집 비용, task sampling, evaluation design, distribution shift는 실험설계와 매우 잘 맞는 문제다.
 
 ---
 
@@ -209,7 +209,7 @@ DSBA 관점: 데이터 수집 비용, task sampling, evaluation design, distribu
 | 17 | Generative Interactive Worlds | `W4` Genie, `W5` Genie 2, `W6` Pandora, `W7` LLMR | video generative model이 controllable environment와 interactive simulator로 확장되는 흐름을 이해한다. | 인터넷 비디오만으로 action-controllable world model을 만들 수 있는가? |
 | 18 | Real-World Simulators and Driving World Models | `W8` UniSim, `W9` GAIA-1 | real-world interaction simulator와 autonomous driving world model을 비교한다. | driving world model의 성공 조건은 manipulation world model과 무엇이 다른가? |
 
-DSBA 관점: simulation은 optimization, scheduling, logistics, manufacturing, autonomous mobility와 직접 연결된다. 단, 생성 모델의 그럴듯함과 의사결정 신뢰성은 분리해서 봐야 한다.
+활용 관점: simulation은 optimization, scheduling, logistics, manufacturing, autonomous mobility와 직접 연결된다. 단, 생성 모델의 그럴듯함과 의사결정 신뢰성은 분리해서 봐야 한다.
 
 ---
 
@@ -253,7 +253,7 @@ DSBA 관점: simulation은 optimization, scheduling, logistics, manufacturing, a
 | 25 | Cooperative Multi-Agent AI | `A1` ProAgent, `A2` REVECA | multi-agent cooperation, embodied coordination, communication 구조를 이해한다. | multi-agent setting에서 중요한 것은 개별 agent 능력인가, coordination protocol인가? |
 | 26 | Multi-Agent Reliability and Safety Reasoning | `A3` Resilience, `A4` SMART, `A5` BotSim, `A6` Debate on Graph | multi-agent robustness, simulation, safety reasoning, debate 구조를 비교한다. | 여러 agent가 토론하면 물리 세계 의사결정은 더 안전해지는가? |
 
-DSBA 관점: multi-agent coordination은 supply chain, transportation, smart factory, scheduling, human-AI teaming과 자연스럽게 연결된다.
+활용 관점: multi-agent coordination은 supply chain, transportation, smart factory, scheduling, human-AI teaming과 자연스럽게 연결된다.
 
 ---
 
@@ -361,7 +361,7 @@ CSV 논문만으로 커리큘럼을 구성하지 않고, 분야의 흐름을 보
 | 4 | 핵심 결과: benchmark, qualitative result, ablation, failure case |
 | 5 | 한계: 저자가 말한 한계와 발표자가 읽은 한계를 분리 |
 | 6 | 연결: 이전/다음 발표 논문과의 관계 |
-| 7 | DSBA 관점: data design, optimization, evaluation, operations, safety 중 어디와 연결되는가? |
+| 7 | 활용 관점: data design, optimization, evaluation, operations, safety 중 어디와 연결되는가? |
 
 발표자는 `metadata.md`의 metadata를 첫 슬라이드에 사용하고, `corpus/extracted_reading_evidence_snippets.md`에서 직접 확인한 문장을 근거로 삼는다. 단, 발표 자료에는 긴 원문 인용보다 요약과 해석을 중심으로 넣는다.
 
@@ -380,7 +380,7 @@ CSV 논문만으로 커리큘럼을 구성하지 않고, 분야의 흐름을 보
 | Evaluation | generalist robot benchmark는 task success만으로 충분한가? |
 | Safety | VLA의 reasoning trace는 safety를 높이는가, 아니면 그럴듯한 설명만 제공하는가? |
 | Industrial AI | physical AI가 제조, 물류, 의료, 모빌리티에 들어갈 때 가장 먼저 해결해야 하는 문제는 무엇인가? |
-| DSBA | DSBA가 기여하기 좋은 지점은 algorithm 자체인가, data/evaluation/operation layer인가? |
+| 응용 관점 | 기여하기 좋은 지점은 algorithm 자체인가, data/evaluation/operation layer인가? |
 
 ---
 

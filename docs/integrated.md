@@ -1,7 +1,7 @@
 # Physical AI & World Model 통합 문서
 
 작성일: 2026-05-11
-대상: DSBA 연구실 / 산업공학과 기반 AI 스터디
+대상: Physical AI & World Model 스터디
 구성: Related Works, Paper Metadata, 15주/30회 스터디 커리큘럼 통합본
 
 ---
@@ -34,7 +34,7 @@
 
 ## 전체 논문 읽기 순서와 Curated Note 링크
 
-읽기 순서는 커리큘럼 발표 순서를 기본으로 하되, 처음에는 survey로 큰 지도를 만들고 이후 foundation, robot data, policy, VLA, world model, safety/evaluation, DSBA 확장 순서로 이어지도록 재배열했다. `Note` 링크는 각 논문의 상세 요약 문서로 연결된다.
+읽기 순서는 커리큘럼 발표 순서를 기본으로 하되, 처음에는 survey로 큰 지도를 만들고 이후 foundation, robot data, policy, VLA, world model, safety/evaluation, 응용 확장 순서로 이어지도록 재배열했다. `Note` 링크는 각 논문의 상세 요약 문서로 연결된다.
 
 ### Phase 0. 큰 지도 먼저 잡기
 
@@ -120,7 +120,7 @@
 | 48 | E4 | LIBERO | [E4.md](papers/E4.md) | lifelong robot learning benchmark와 knowledge transfer 평가를 본다. |
 | 49 | E5 | Hierarchical Active Inference | [E5.md](papers/E5.md) | active inference 기반 control/safety 철학을 VLA/RL과 비교한다. |
 
-### Phase 7. DSBA 확장: Digital Twin, Healthcare, Multi-Agent
+### Phase 7. 응용 확장: Digital Twin, Healthcare, Multi-Agent
 
 | 순서 | ID | 논문 | Note | 읽는 목적 |
 |---:|---|---|---|---|
@@ -247,9 +247,9 @@ Healthcare와 wearable sensor 영역도 넓은 의미의 Physical AI로 볼 수 
 
 Multi-agent 연구도 현장 배포에서 중요하다. ProAgent (A1), REVECA (A2), Resilience of LLM-Based Multi-Agent Collaboration (A3), Synergistic MAS (A4), BotSim (A5), Debate on Graph (A6)는 LLM 기반 multi-agent collaboration, faulty agent, malicious simulation, reliable reasoning을 다룬다. 이 논문들이 직접 로봇 논문은 아니더라도, 다중 로봇, 작업자, 센서, 관리자 agent가 함께 움직이는 Physical AI 시스템을 이해하는 데 참고할 수 있다.
 
-### 10. DSBA 관점의 핵심 연결
+### 10. 현장 적용 관점의 핵심 연결
 
-산업공학과 DSBA 연구실 관점에서는 Physical AI를 단순히 "로봇을 잘 움직이는 모델"로만 보면 좁다. 더 자연스러운 연결점은 데이터, 최적화, 안전, 센서, 운영 시스템이다.
+현장 적용 관점에서는 Physical AI를 단순히 "로봇을 잘 움직이는 모델"로만 보면 좁다. 더 자연스러운 연결점은 데이터, 최적화, 안전, 센서, 운영 시스템이다.
 
 - Data-centric AI: demonstration quality, synthetic data validation, dataset diversity, continual adaptation
 - Operations research: robot task allocation, scheduling, resource allocation, digital twin optimization
@@ -257,7 +257,7 @@ Multi-agent 연구도 현장 배포에서 중요하다. ProAgent (A1), REVECA (A
 - Sensor analytics: wearable, PSG, IoT signal foundation models and digital biomarkers
 - Multi-agent systems: robot fleets, human-robot teams, warehouse/factory coordination
 
-이 관점에서 Physical AI와 World Model은 DSBA가 이미 다루던 예측, 최적화, 이상탐지, 의사결정, 시뮬레이션 문제를 물리 세계로 확장하는 연구 지형으로 볼 수 있다.
+이 관점에서 Physical AI와 World Model은 기존 데이터 기반 의사결정에서 다루던 예측, 최적화, 이상탐지, 의사결정, 시뮬레이션 문제를 물리 세계로 확장하는 연구 지형으로 볼 수 있다.
 
 ### 11. Open Issues
 
@@ -416,7 +416,7 @@ Multi-agent 연구도 현장 배포에서 중요하다. ProAgent (A1), REVECA (A
 ## Physical AI & World Model 스터디 커리큘럼
 
 작성일: 2026-05-08  
-대상: DSBA 연구실 / 산업공학과 기반 AI 스터디  
+대상: Physical AI & World Model 스터디  
 구성: 15주, 주 2회 발표, 총 30회 발표
 
 ---
@@ -465,7 +465,7 @@ Multi-agent 연구도 현장 배포에서 중요하다. ProAgent (A1), REVECA (A
 | VLM이 보는 것과 로봇이 할 수 있는 것은 왜 다른가? | perception-action gap |
 | world model은 시뮬레이터인가, 정책인가, 아니면 둘 사이의 인터페이스인가? | world model의 역할 |
 | 데이터가 많아지면 로봇도 LLM처럼 일반화되는가? | scaling hypothesis |
-| 산업공학/DSBA 관점에서는 어디에서 가치를 만들 수 있는가? | 실험설계, 운영, 평가, 안전, digital twin |
+| 활용 관점에서는 어디에서 가치를 만들 수 있는가? | 실험설계, 운영, 평가, 안전, digital twin |
 
 #### 1.3 논문 간 연결을 명시한다
 
@@ -569,7 +569,7 @@ Multi-agent 연구도 현장 배포에서 중요하다. ProAgent (A1), REVECA (A
 | 7 | DROID/ALOHA: Data Collection and Teleoperation | `D2` DROID, `D3` ALOHA/ACT | real-world robot data collection과 low-cost teleoperation이 왜 중요한지 이해한다. | 좋은 robot dataset은 크기보다 다양성, 품질, task coverage 중 무엇이 더 중요한가? |
 | 8 | Octo/OpenVLA: Open Generalist Policies | `D4` Octo, `D5` OpenVLA | open-source generalist robot policy의 설계와 한계를 비교한다. | open VLA는 closed industrial VLA와 어떤 방식으로 경쟁하거나 보완할 수 있을까? |
 
-DSBA 관점: 데이터 수집 비용, task sampling, evaluation design, distribution shift는 산업공학적 실험설계와 매우 잘 맞는 문제다.
+활용 관점: 데이터 수집 비용, task sampling, evaluation design, distribution shift는 실험설계와 매우 잘 맞는 문제다.
 
 ---
 
@@ -624,7 +624,7 @@ DSBA 관점: 데이터 수집 비용, task sampling, evaluation design, distribu
 | 17 | Generative Interactive Worlds | `W4` Genie, `W5` Genie 2, `W6` Pandora, `W7` LLMR | video generative model이 controllable environment와 interactive simulator로 확장되는 흐름을 이해한다. | 인터넷 비디오만으로 action-controllable world model을 만들 수 있는가? |
 | 18 | Real-World Simulators and Driving World Models | `W8` UniSim, `W9` GAIA-1 | real-world interaction simulator와 autonomous driving world model을 비교한다. | driving world model의 성공 조건은 manipulation world model과 무엇이 다른가? |
 
-DSBA 관점: simulation은 optimization, scheduling, logistics, manufacturing, autonomous mobility와 직접 연결된다. 단, 생성 모델의 그럴듯함과 의사결정 신뢰성은 분리해서 봐야 한다.
+활용 관점: simulation은 optimization, scheduling, logistics, manufacturing, autonomous mobility와 직접 연결된다. 단, 생성 모델의 그럴듯함과 의사결정 신뢰성은 분리해서 봐야 한다.
 
 ---
 
@@ -668,7 +668,7 @@ DSBA 관점: simulation은 optimization, scheduling, logistics, manufacturing, a
 | 25 | Cooperative Multi-Agent AI | `A1` ProAgent, `A2` REVECA | multi-agent cooperation, embodied coordination, communication 구조를 이해한다. | multi-agent setting에서 중요한 것은 개별 agent 능력인가, coordination protocol인가? |
 | 26 | Multi-Agent Reliability and Safety Reasoning | `A3` Resilience, `A4` SMART, `A5` BotSim, `A6` Debate on Graph | multi-agent robustness, simulation, safety reasoning, debate 구조를 비교한다. | 여러 agent가 토론하면 물리 세계 의사결정은 더 안전해지는가? |
 
-DSBA 관점: multi-agent coordination은 supply chain, transportation, smart factory, scheduling, human-AI teaming과 자연스럽게 연결된다.
+활용 관점: multi-agent coordination은 supply chain, transportation, smart factory, scheduling, human-AI teaming과 자연스럽게 연결된다.
 
 ---
 
@@ -776,7 +776,7 @@ CSV 논문만으로 커리큘럼을 구성하지 않고, 분야의 흐름을 보
 | 4 | 핵심 결과: benchmark, qualitative result, ablation, failure case |
 | 5 | 한계: 저자가 말한 한계와 발표자가 읽은 한계를 분리 |
 | 6 | 연결: 이전/다음 발표 논문과의 관계 |
-| 7 | DSBA 관점: data design, optimization, evaluation, operations, safety 중 어디와 연결되는가? |
+| 7 | 활용 관점: data design, optimization, evaluation, operations, safety 중 어디와 연결되는가? |
 
 발표자는 `metadata.md`의 metadata를 첫 슬라이드에 사용하고, `corpus/extracted_reading_evidence_snippets.md`에서 직접 확인한 문장을 근거로 삼는다. 단, 발표 자료에는 긴 원문 인용보다 요약과 해석을 중심으로 넣는다.
 
@@ -795,7 +795,7 @@ CSV 논문만으로 커리큘럼을 구성하지 않고, 분야의 흐름을 보
 | Evaluation | generalist robot benchmark는 task success만으로 충분한가? |
 | Safety | VLA의 reasoning trace는 safety를 높이는가, 아니면 그럴듯한 설명만 제공하는가? |
 | Industrial AI | physical AI가 제조, 물류, 의료, 모빌리티에 들어갈 때 가장 먼저 해결해야 하는 문제는 무엇인가? |
-| DSBA | DSBA가 기여하기 좋은 지점은 algorithm 자체인가, data/evaluation/operation layer인가? |
+| 응용 관점 | 기여하기 좋은 지점은 algorithm 자체인가, data/evaluation/operation layer인가? |
 
 ---
 

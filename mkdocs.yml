@@ -1,6 +1,6 @@
 site_name: Physical AI & World Model Study
-site_description: DSBA Physical AI & World Model paper study notes, curriculum, and related works.
-site_author: DSBA
+site_description: Physical AI & World Model paper study notes, curriculum, and related works.
+site_author: Physical AI & World Model Study
 site_url: https://tootouch.github.io/physical-ai-world-model-study/
 repo_url: https://github.com/tootouch/physical-ai-world-model-study
 repo_name: tootouch/physical-ai-world-model-study
@@ -102,7 +102,7 @@ nav:
           - E3. RoboArena: papers/E3.md
           - E4. LIBERO: papers/E4.md
           - E5. Active Inference: papers/E5.md
-      - DSBA Extensions:
+      - Applications & Extensions:
           - A1. ProAgent: papers/A1.md
           - A2. REVECA: papers/A2.md
           - A3. Multi-Agent Resilience: papers/A3.md

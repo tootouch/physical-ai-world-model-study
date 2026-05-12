@@ -1,6 +1,6 @@
 # Physical AI & World Model Study
 
-DSBA 연구실의 Physical AI & World Model 스터디 문서를 웹사이트 형태로 정리한 공간입니다. 논문 흐름, 메타데이터, 15주/30회 커리큘럼, 논문별 curated note를 한 곳에서 탐색할 수 있도록 구성했습니다.
+Physical AI & World Model 스터디 문서를 웹사이트 형태로 정리한 공간입니다. 논문 흐름, 메타데이터, 15주/30회 커리큘럼, 논문별 curated note를 한 곳에서 탐색할 수 있도록 구성했습니다.
 
 ## 바로가기
 

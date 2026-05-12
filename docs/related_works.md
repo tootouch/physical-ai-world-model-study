@@ -106,9 +106,9 @@ Healthcare와 wearable sensor 영역도 넓은 의미의 Physical AI로 볼 수 
 
 Multi-agent 연구도 현장 배포에서 중요하다. ProAgent (A1), REVECA (A2), Resilience of LLM-Based Multi-Agent Collaboration (A3), Synergistic MAS (A4), BotSim (A5), Debate on Graph (A6)는 LLM 기반 multi-agent collaboration, faulty agent, malicious simulation, reliable reasoning을 다룬다. 이 논문들이 직접 로봇 논문은 아니더라도, 다중 로봇, 작업자, 센서, 관리자 agent가 함께 움직이는 Physical AI 시스템을 이해하는 데 참고할 수 있다.
 
-## 10. DSBA 관점의 핵심 연결
+## 10. 현장 적용 관점의 핵심 연결
 
-산업공학과 DSBA 연구실 관점에서는 Physical AI를 단순히 "로봇을 잘 움직이는 모델"로만 보면 좁다. 더 자연스러운 연결점은 데이터, 최적화, 안전, 센서, 운영 시스템이다.
+현장 적용 관점에서는 Physical AI를 단순히 "로봇을 잘 움직이는 모델"로만 보면 좁다. 더 자연스러운 연결점은 데이터, 최적화, 안전, 센서, 운영 시스템이다.
 
 - Data-centric AI: demonstration quality, synthetic data validation, dataset diversity, continual adaptation
 - Operations research: robot task allocation, scheduling, resource allocation, digital twin optimization
@@ -116,7 +116,7 @@ Multi-agent 연구도 현장 배포에서 중요하다. ProAgent (A1), REVECA (A
 - Sensor analytics: wearable, PSG, IoT signal foundation models and digital biomarkers
 - Multi-agent systems: robot fleets, human-robot teams, warehouse/factory coordination
 
-이 관점에서 Physical AI와 World Model은 DSBA가 이미 다루던 예측, 최적화, 이상탐지, 의사결정, 시뮬레이션 문제를 물리 세계로 확장하는 연구 지형으로 볼 수 있다.
+이 관점에서 Physical AI와 World Model은 기존 데이터 기반 의사결정에서 다루던 예측, 최적화, 이상탐지, 의사결정, 시뮬레이션 문제를 물리 세계로 확장하는 연구 지형으로 볼 수 있다.
 
 ## 11. Open Issues
 
