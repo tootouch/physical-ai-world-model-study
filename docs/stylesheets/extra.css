@@ -46,17 +46,17 @@ html {
 
 body {
   background:
-    radial-gradient(circle at 8% 10%, rgba(255, 107, 53, 0.18), transparent 22rem),
-    radial-gradient(circle at 86% 12%, rgba(33, 79, 107, 0.17), transparent 24rem),
-    linear-gradient(135deg, rgba(18, 20, 23, 0.045) 25%, transparent 25%) 0 0 / 34px 34px,
+    radial-gradient(circle at 0% 8%, rgba(255, 107, 53, 0.10), transparent 26rem),
+    radial-gradient(circle at 100% 12%, rgba(33, 79, 107, 0.08), transparent 28rem),
+    linear-gradient(180deg, #fbf7ef 0%, var(--study-bg) 44%, #efe8dd 100%),
     var(--study-bg);
 }
 
 [data-md-color-scheme="slate"] body {
   background:
-    radial-gradient(circle at 8% 10%, rgba(255, 107, 53, 0.14), transparent 22rem),
-    radial-gradient(circle at 86% 12%, rgba(127, 183, 216, 0.11), transparent 24rem),
-    linear-gradient(135deg, rgba(247, 239, 228, 0.035) 25%, transparent 25%) 0 0 / 34px 34px,
+    radial-gradient(circle at 0% 8%, rgba(255, 107, 53, 0.09), transparent 26rem),
+    radial-gradient(circle at 100% 12%, rgba(127, 183, 216, 0.08), transparent 28rem),
+    linear-gradient(180deg, #0d1318 0%, var(--study-bg) 48%, #080c10 100%),
     var(--study-bg);
 }
 
