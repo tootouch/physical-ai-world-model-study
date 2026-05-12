@@ -1,0 +1,50 @@
+ID,Title,Team (Affilation),Background,Year,Conference/Journal,Link
+1,RT-1: Robotics Transformer for Real-World Control at Scale,Google DeepMind,Robotics,2022,arXiv preprint,https://arxiv.org/abs/2212.06817
+2,RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control,Google DeepMind,Robotics,2023,PMLR,https://proceedings.mlr.press/v229/zitkovich23a
+3,PaLM-E: An Embodied Multimodal Language Model,"Robotics at Google; TU Berlin; 
+Google Research",Robotics,2023,ICML,https://arxiv.org/abs/2303.03378
+4,Genie: Generative Interactive Environments,Google DeepMind,World Model,2024,ICML,https://openreview.net/forum?id=bJbSbJskOS
+5,Training Agents Inside of Scalable World Models,Google DeepMind,World Model,2025,Neurips,https://arxiv.org/abs/2509.24527
+6,DreamerV3: Mastering Diverse Control Tasks through World Models,"Google DeepMind; 
+University of Toronto",World Model,2025,Nature,https://www.nature.com/articles/s41586-025-08744-2
+7,Gemini Robotics: Bringing AI into the Physical World,Google DeepMind,Robotics,2025,arXiv preprint,https://arxiv.org/abs/2503.20020
+8,Dreamgen: Unlocking generalization in robot learning through video world models,GEAR @ NVIDIA Research,"World Model, Robotics",2025,arXiv preprint,https://arxiv.org/abs/2505.12705
+9,World Simulation with Video Foundation Models for Physical AI,NVIDIA,World Model,2026,arXiv preprint,https://arxiv.org/abs/2511.00062
+10,World Action Models are Zero-shot Policies,NVIDIA,World Model,2026,arXiv preprint,https://arxiv.org/abs/2602.15922
+11,CoT-VLA: Visual Chain-of-Thought Reasoning for Vision-Language-Action Models,"NVIDIA, Stanford Univ.",VLA,2025,CVPR,https://openaccess.thecvf.com/content/CVPR2025/html/Zhao_CoT-VLA_Visual_Chain-of-Thought_Reasoning_for_Vision-Language-Action_Models_CVPR_2025_paper.html
+12,GR00T N1: An Open Foundation Model for Generalist Humanoid Robots,NVIDIA,Robotics,2025,arxiv preprint,https://arxiv.org/abs/2503.14734
+13,CogACT: A Foundational Vision-Language-Action Model for Synergizing Cognition and Action in Robotic Manipulation,"Microsoft Research Asia; Tsinghua University ; USTC; Institute of Microelectronics, CAS",VLA,2024,arXiv preprint,https://arxiv.org/abs/2411.19650
+14,Pretrained Vision-Language-Action Models are Surprisingly Resistant to Forgetting in Continual Learning,"The University of Texas at Austin;  KAIST ; 
+Microsoft Superintelligence",VLA,2026,arxiv preprint,https://arxiv.org/abs/2603.03818
+15,LLMR: Real-time Prompting of Interactive Worlds using Large Language Models,Microsoft,"LLM, HCI",2024,CHI,https://arxiv.org/pdf/2309.12276v1
+16,OpenVLA: An Open-Source Vision-Language-Action Model,"Stanford University, UC Berkeley, Toyota Research Institute, 
+Google DeepMind, Physical Intelligence, MIT,",VLA,2024,arXiv preprint,https://arxiv.org/pdf/2406.09246
+17,X-VLA: Soft-Prompted Transformer as Scalable Cross-Embodiment Vision-Language-Action Model,"Institute for AI Industry Research (AIR), Tsinghua University 
+Shanghai Artificial Intelligence Laboratory, Peking University",VLA,2025,ICLR 2026,https://thu-air-dream.github.io/X-VLA/
+18,π0: A Vision-Language-Action Flow Model for General Robot Control,Physical Intelligence,Robotics,2024,arXiv preprint,https://arxiv.org/pdf/2410.24164
+19,π0.5: a Vision-Language-Action Model with Open-World Generalization,Physical Intelligence,"Robotics, VLA",2025,CORL,https://arxiv.org/abs/2504.16054
+20,Why learn if you can infer? Robot arm control with Hierarchical Active Inference,VERSES AI,"Robotics, NeuroScience",2024,Neurips,https://neurips.cc/virtual/2024/99477
+21,The free-energy principle: a unified brain theory?,"The Wellcome Trust Centre for Neuroimaging, University College London,","BIO/Medical, NeuroScience",2010,Nature Reviews Neuroscience,https://www.nature.com/articles/nrn2787
+22,A multimodal sleep foundation model for disease prediction,"Department of Biomedical Data Science, Stanford University, Stanford",BIO/Medical,2026,Nature Medicine,https://www.nature.com/articles/s41591-025-04133-4
+23,Foundation models for generalist medical artificial intelligence,"Department of Biomedical Informatics, Harvard University, Cambridge, MA, USA
+",BIO/Medical,2023,Nature,https://www.nature.com/articles/s41586-023-05881-4
+24,From wearable sensor data to digital biomarker development,"Institute for Implementation Science in Health Care, University of Zurich, Zurich, Switzerland","BIO/Medical, Sensor",2024,Nature,https://www.nature.com/articles/s41746-024-01151-3?utm_source=chatgpt.com
+25,Diffusion Policy: Visuomotor Policy Learning via Action Diffusion,Columbia Engineering; TOYOTA Research Institute; MIT,Robotics,2025,IJRR,https://journals.sagepub.com/doi/full/10.1177/02783649241273668
+26,3D Diffusion Policy (DP3): Generalizable Visuomotor Policy Learning via Simple 3D Representations,"Shanghai Qi Zhi Institute; Shanghai Jiao Tong University; Tsinghua University, IIIS; Shanghai AI La",Robotics,2024,RSS,https://arxiv.org/abs/2403.03954
+27,Diffusion-VLA: Generalizable and Interpretable Robot Foundation Model via Self-Generated Reasoning,"Midea Group, Shanghai,
+China",Robotics,2024,ICML,https://arxiv.org/abs/2412.03293
+28,PhysVLM: Enabling Visual Language Models to Understand Robotic Physical Reachability," School of Traffic and Transportation, Beijing Jiaotong University; Foundation Model Research Center, Institute of Automation, Chinese Academy of Sciences; ObjectEye Inc.; Guangdong Provincial Key Laboratory of Intellectual Property & Big Data; Guangdong Polytechnic Normal University",Robotics,2025,CVPR,https://openaccess.thecvf.com/content/CVPR2025/papers/Zhou_PhysVLM_Enabling_Visual_Language_Models_to_Understand_Robotic_Physical_Reachability_CVPR_2025_paper.pdf
+29,Code-as-Monitor: Constraint-aware Visual Programming for Reactive and Proactive Robotic Failure Detection,"Beihang University; Peking University; Beijing Academy of Artificial Intelligence; 
+GalBot;",Robotics,2025,CVPR,https://arxiv.org/pdf/2412.04455
+30,ProAgent: Building Proactive Cooperative Agents with Large Language Models,"CUHK-Shenzhen; Insitute of AI, PKU; Insitute of Automation, CAS; RELER, AAII, UTS;
+BIGAI","LLM, Multi-Agent",2024,AAAI,https://ojs.aaai.org/index.php/AAAI/article/view/29710
+31,REVECA: Adaptive Planning and Trajectory-Based Validation in Cooperative Language Agents Using Information Relevance and Relative Proximity,"Kyung Hee University, Yongin, Republic of Korea; Korea University, Seongbuk-gu, Republic of Korea","LLM, Multi-Agent",2025,AAAI,https://ojs.aaai.org/index.php/AAAI/article/view/34496
+32,On the Resilience of LLM-Based Multi-Agent Collaboration with Faulty Agents,"Chinese University of Hong Kong; Tsinghua University; 
+Carnegie Mellon University; Peking University; Renmin University of China; Chinese University of Hong Kong, Shenzhen.","LLM, Multi-Agent",2025,ICML,https://proceedings.mlr.press/v267/huang25ay.html
+33,Synergistic Multi-Agent Framework with Trajectory Learning for Knowledge-Intensive Tasks,"Fudan University, Shanghai, China; University of Southern California, Los Angeles, USA; Huazhong University of Science and Technology, Wuhan, China","LLM, Multi-Agent",2025,AAAI,https://ojs.aaai.org/index.php/AAAI/article/view/34772
+34,BotSim: LLM-Powered Malicious Social Botnet Simulation,"Institute of Information Engineering, Chinese Academy of Sciences; School of Cyber Security, University of Chinese Academy of Sciences","LLM, AI Safety",2025,AAAI,https://ojs.aaai.org/index.php/AAAI/article/view/33575
+35,Debate on Graph: A Flexible and Reliable Reasoning Framework for Large Language Models,"MOE KLINNS Lab, Xi’an Jiaotong University; The Hong Kong University of Science and Technology (Guangzhou); Northwestern Polytechnical University; Zhejiang Createlink Technology; Shandong University",LLM,2025,AAAI,https://ojs.aaai.org/index.php/AAAI/article/view/34658
+36,SAM-6D: Segment Anything Model Meets Zero-Shot 6D Object Pose Estimation,"School of Data Science, The Chinese University of Hong Kong, Shenzhen
+3South China University of Technology, Guangzhou",6D tasks,2024,CVPR,https://arxiv.org/abs/2311.15707
+37,RADiT: Resource Allocation in Digital Twin-Driven UAV-Aided Internet of Vehicle Networks,"National Sun Yat-sen University: Kaohsiung, Kaohsiung, TW, 
+City University of Hong Kong: Kowloon, HK, HK",Digital Twin,2023,IEEE Journal on Selected Areas in Communications (JSAC),https://ieeexplore.ieee.org/document/10234627

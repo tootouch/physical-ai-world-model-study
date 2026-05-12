@@ -1,0 +1,63 @@
+# Download and Extraction Status
+
+| No. | Status | Source |
+|---|---|---|
+| S1 | text_extracted chars=51906 | https://arxiv.org/pdf/2402.02385.pdf |
+| S2 | text_extracted chars=353932 | https://arxiv.org/pdf/2405.14093.pdf |
+| S3 | text_extracted chars=169734 | https://arxiv.org/pdf/2506.22355.pdf |
+| S4 | text_extracted chars=139234 | https://arxiv.org/pdf/2510.16732.pdf |
+| S5 | text_extracted chars=165324 | https://arxiv.org/pdf/2512.11362.pdf |
+| G1 | text_extracted chars=115085 | https://arxiv.org/pdf/2205.06175.pdf |
+| G2 | text_extracted chars=109774 | https://arxiv.org/pdf/2204.01691.pdf |
+| G3 | text_extracted chars=156104 | https://arxiv.org/pdf/2210.03094.pdf |
+| G4 | text_extracted chars=105938 | https://arxiv.org/pdf/2212.06817.pdf |
+| G5 | text_extracted chars=75038 | https://arxiv.org/pdf/2303.03378.pdf |
+| G6 | html_extracted chars=11020 | https://proceedings.mlr.press/v229/zitkovich23a.html |
+| D1 | text_extracted chars=64591 | https://arxiv.org/pdf/2310.08864.pdf |
+| D2 | text_extracted chars=83209 | https://arxiv.org/pdf/2304.13705.pdf |
+| D3 | text_extracted chars=97150 | https://arxiv.org/pdf/2403.12945.pdf |
+| D4 | text_extracted chars=84878 | https://arxiv.org/pdf/2405.12213.pdf |
+| D5 | text_extracted chars=135652 | https://arxiv.org/pdf/2406.09246.pdf |
+| D6 | html_extracted chars=2803 | https://iclr.cc/virtual/2026/poster/10007740 |
+| D7 | text_extracted chars=80987 | https://arxiv.org/pdf/2603.03818.pdf |
+| P1 | text_extracted chars=101578 | https://arxiv.org/pdf/2303.04137.pdf |
+| P2 | text_extracted chars=72630 | https://arxiv.org/pdf/2403.03954.pdf |
+| P3 | text_extracted chars=105189 | https://arxiv.org/pdf/2410.07864.pdf |
+| P4 | text_extracted chars=89733 | https://arxiv.org/pdf/2410.24164.pdf |
+| P5 | text_extracted chars=98426 | https://arxiv.org/pdf/2504.16054.pdf |
+| P6 | text_extracted chars=116006 | https://arxiv.org/pdf/2503.14734.pdf |
+| V1 | text_extracted chars=70223 | https://arxiv.org/pdf/2411.19650.pdf |
+| V2 | text_extracted chars=70830 | https://arxiv.org/pdf/2412.03293.pdf |
+| V3 | text_extracted chars=53669 | https://openaccess.thecvf.com/content/CVPR2025/papers/Zhao_CoT-VLA_Visual_Chain-of-Thought_Reasoning_for_Vision-Language-Action_Models_CVPR_2025_paper.pdf |
+| V4 | text_extracted chars=101113 | https://arxiv.org/pdf/2501.15830.pdf |
+| V5 | text_extracted chars=81224 | https://arxiv.org/pdf/2406.04339.pdf |
+| V6 | text_extracted chars=94945 | https://arxiv.org/pdf/2502.21257.pdf |
+| V7 | text_extracted chars=165371 | https://arxiv.org/pdf/2503.20020.pdf |
+| V8 | text_extracted chars=44900 | https://openaccess.thecvf.com/content/CVPR2025/papers/Zhou_PhysVLM_Enabling_Visual_Language_Models_to_Understand_Robotic_Physical_Reachability_CVPR_2025_paper.pdf |
+| W1 | html_extracted chars=92365 | https://www.nature.com/articles/nrn2787 |
+| W2 | html_extracted chars=73930 | https://www.nature.com/articles/s41586-025-08744-2 |
+| W3 | text_extracted chars=81118 | https://arxiv.org/pdf/2509.24527.pdf |
+| W4 | html_extracted chars=6311 | https://deepmind.google/research/publications/genie-generative-interactive-environments/ |
+| W5 | html_extracted chars=22305 | https://deepmind.google/discover/blog/genie-2-a-large-scale-foundation-world-model/ |
+| W6 | text_extracted chars=45981 | https://arxiv.org/pdf/2406.09455.pdf |
+| W7 | text_extracted chars=179598 | https://arxiv.org/pdf/2309.12276.pdf |
+| W8 | text_extracted chars=70796 | https://arxiv.org/pdf/2310.06114.pdf |
+| W9 | text_extracted chars=70426 | https://arxiv.org/pdf/2309.17080.pdf |
+| W10 | text_extracted chars=71041 | https://arxiv.org/pdf/2505.12705.pdf |
+| W11 | text_extracted chars=127125 | https://arxiv.org/pdf/2511.00062.pdf |
+| W12 | text_extracted chars=119252 | https://arxiv.org/pdf/2602.15922.pdf |
+| E1 | text_extracted chars=73779 | https://arxiv.org/pdf/2311.15707.pdf |
+| E2 | text_extracted chars=114824 | https://arxiv.org/pdf/2412.04455.pdf |
+| E3 | text_extracted chars=93631 | https://arxiv.org/pdf/2506.18123.pdf |
+| E4 | text_extracted chars=85556 | https://arxiv.org/pdf/2306.03310.pdf |
+| E5 | html_extracted chars=2422 | https://neurips.cc/virtual/2024/99477 |
+| A1 | html_extracted chars=4538 | https://ojs.aaai.org/index.php/AAAI/article/view/29710 |
+| A2 | html_extracted chars=2832 | https://ojs.aaai.org/index.php/AAAI/article/view/34496 |
+| A3 | html_extracted chars=6677 | https://proceedings.mlr.press/v267/huang25ay.html |
+| A4 | html_extracted chars=2761 | https://ojs.aaai.org/index.php/AAAI/article/view/34772 |
+| A5 | html_extracted chars=3301 | https://ojs.aaai.org/index.php/AAAI/article/view/33575 |
+| A6 | html_extracted chars=3623 | https://ojs.aaai.org/index.php/AAAI/article/view/34658 |
+| A7 | limited_access: IEEE page blocked; summarized from IEEE metadata and public full-text preview/search snippets | https://ieeexplore.ieee.org/document/10234627 |
+| A8 | html_extracted chars=58906 | https://www.nature.com/articles/s41586-023-05881-4 |
+| A9 | html_extracted chars=57665 | https://www.nature.com/articles/s41746-024-01151-3 |
+| A10 | html_extracted chars=88295 | https://www.nature.com/articles/s41591-025-04133-4 |

@@ -1,0 +1,5 @@
+.mkdocs_deps/
+site/
+.cache/
+.DS_Store
+all_equations.*

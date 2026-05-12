@@ -1,0 +1,143 @@
+site_name: Physical AI & World Model Study
+site_description: DSBA Physical AI & World Model paper study notes, curriculum, and related works.
+site_author: DSBA
+site_url: https://tootouch.github.io/physical-ai-world-model-study/
+repo_url: https://github.com/tootouch/physical-ai-world-model-study
+repo_name: tootouch/physical-ai-world-model-study
+
+docs_dir: docs
+site_dir: site
+
+not_in_nav: |
+  figures_source/**/manifest.md
+  papers/queue.md
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: 다크 모드로 전환
+    - scheme: slate
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: 라이트 모드로 전환
+
+nav:
+  - Home: index.md
+  - 통합 문서: integrated.md
+  - 커리큘럼: curriculum.md
+  - Related Works: related_works.md
+  - Metadata: metadata.md
+  - Paper Notes:
+      - Overview: papers/index.md
+      - Survey:
+          - S1. Robotics with Foundation Models: papers/S1.md
+          - S2. VLA Survey: papers/S2.md
+          - S3. Embodied AI Agents: papers/S3.md
+          - S4. World Models for Embodied AI: papers/S4.md
+          - S5. Anatomy of VLA Models: papers/S5.md
+      - Generalist & VLA Foundations:
+          - G1. Gato: papers/G1.md
+          - G2. SayCan: papers/G2.md
+          - G3. VIMA: papers/G3.md
+          - G4. RT-1: papers/G4.md
+          - G5. PaLM-E: papers/G5.md
+          - G6. RT-2: papers/G6.md
+      - Robot Data & Open Policies:
+          - D1. Open X-Embodiment: papers/D1.md
+          - D2. ALOHA / ACT: papers/D2.md
+          - D3. DROID: papers/D3.md
+          - D4. Octo: papers/D4.md
+          - D5. OpenVLA: papers/D5.md
+          - D6. X-VLA: papers/D6.md
+          - D7. Continual VLA: papers/D7.md
+      - Robot Foundation Policies:
+          - P1. Diffusion Policy: papers/P1.md
+          - P2. 3D Diffusion Policy: papers/P2.md
+          - P3. RDT-1B: papers/P3.md
+          - P4. pi0: papers/P4.md
+          - P5. pi0.5: papers/P5.md
+          - P6. GR00T N1: papers/P6.md
+      - VLA Reasoning & Physical Grounding:
+          - V1. CogACT: papers/V1.md
+          - V2. Diffusion-VLA: papers/V2.md
+          - V3. CoT-VLA: papers/V3.md
+          - V4. SpatialVLA: papers/V4.md
+          - V5. RoboMamba: papers/V5.md
+          - V6. RoboBrain: papers/V6.md
+          - V7. Gemini Robotics: papers/V7.md
+          - V8. PhysVLM: papers/V8.md
+      - World Models:
+          - W1. Free-Energy Principle: papers/W1.md
+          - W2. DreamerV3: papers/W2.md
+          - W3. Scalable World Models: papers/W3.md
+          - W4. Genie: papers/W4.md
+          - W5. Genie 2: papers/W5.md
+          - W6. Pandora: papers/W6.md
+          - W7. LLMR: papers/W7.md
+          - W8. UniSim: papers/W8.md
+          - W9. GAIA-1: papers/W9.md
+          - W10. DreamGen: papers/W10.md
+          - W11. Cosmos: papers/W11.md
+          - W12. DreamZero / WAM: papers/W12.md
+      - Safety & Evaluation:
+          - E1. SAM-6D: papers/E1.md
+          - E2. Code-as-Monitor: papers/E2.md
+          - E3. RoboArena: papers/E3.md
+          - E4. LIBERO: papers/E4.md
+          - E5. Active Inference: papers/E5.md
+      - DSBA Extensions:
+          - A1. ProAgent: papers/A1.md
+          - A2. REVECA: papers/A2.md
+          - A3. Multi-Agent Resilience: papers/A3.md
+          - A4. Synergistic MAS: papers/A4.md
+          - A5. BotSim: papers/A5.md
+          - A6. Debate on Graph: papers/A6.md
+          - A7. RADiT: papers/A7.md
+          - A8. Generalist Medical AI: papers/A8.md
+          - A9. Wearable Biomarkers: papers/A9.md
+          - A10. SleepFM: papers/A10.md
+  - Corpus:
+      - Extraction Status: corpus/download_extract_status.md
+      - Evidence Snippets: corpus/extracted_reading_evidence_snippets.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+
+plugins:
+  - search:
+      lang:
+        - ko
+        - en
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
