@@ -1,0 +1,4379 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Physical AI & World Model paper study notes, curriculum, and related works.">
+      
+      
+        <meta name="author" content="Physical AI & World Model Study">
+      
+      
+        <link rel="canonical" href="https://tootouch.github.io/physical-ai-world-model-study/papers/P6/">
+      
+      
+        <link rel="prev" href="../P5/">
+      
+      
+        <link rel="next" href="../V1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>P6. GR00T N1 - Physical AI & World Model Study</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans KR";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#p6-gr00t-n1-an-open-foundation-model-for-generalist-humanoid-robots" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Physical AI &amp; World Model Study" class="md-header__button md-logo" aria-label="Physical AI & World Model Study" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.41 4 16 6.41v.18L18.41 9H22v2h-4.41L16 9.41V12h-1a2 2 0 0 1-2-2V7.5H9.86c-.09.37-.24.72-.44 1.05L15.18 19H20a2 2 0 0 1 2 2v1H2v-1a2 2 0 0 1 2-2h6.61l-4.69-8.5a4.006 4.006 0 0 1-3.81-3A4 4 0 0 1 5 2.63c2.13-.55 4.31.73 4.86 2.87H13V3a2 2 0 0 1 2-2h1v2.59L17.59 2H22v2zM6 4.5a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Physical AI & World Model Study
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              P6. GR00T N1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tootouch/physical-ai-world-model-study" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tootouch/physical-ai-world-model-study
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../integrated/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  통합 문서
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../curriculum/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  커리큘럼
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../related_works/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Related Works
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../metadata/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Metadata
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Paper Notes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../corpus/download_extract_status/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Corpus
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Physical AI &amp; World Model Study" class="md-nav__button md-logo" aria-label="Physical AI & World Model Study" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.41 4 16 6.41v.18L18.41 9H22v2h-4.41L16 9.41V12h-1a2 2 0 0 1-2-2V7.5H9.86c-.09.37-.24.72-.44 1.05L15.18 19H20a2 2 0 0 1 2 2v1H2v-1a2 2 0 0 1 2-2h6.61l-4.69-8.5a4.006 4.006 0 0 1-3.81-3A4 4 0 0 1 5 2.63c2.13-.55 4.31.73 4.86 2.87H13V3a2 2 0 0 1 2-2h1v2.59L17.59 2H22v2zM6 4.5a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
+
+    </a>
+    Physical AI & World Model Study
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tootouch/physical-ai-world-model-study" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tootouch/physical-ai-world-model-study
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    통합 문서
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    커리큘럼
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../related_works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Related Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper Notes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Paper Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Survey
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Survey
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S1. Robotics with Foundation Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S2. VLA Survey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S3. Embodied AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S4. World Models for Embodied AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S5. Anatomy of VLA Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generalist & VLA Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generalist & VLA Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G1. Gato
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G2. SayCan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G3. VIMA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G4. RT-1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G5. PaLM-E
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G6. RT-2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Data & Open Policies
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robot Data & Open Policies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1. Open X-Embodiment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2. ALOHA / ACT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3. DROID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4. Octo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5. OpenVLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6. X-VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7. Continual VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Foundation Policies
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robot Foundation Policies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1. Diffusion Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2. 3D Diffusion Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3. RDT-1B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4. pi0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5. pi0.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6. GR00T N1
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6. GR00T N1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 읽기 전 약어 및 핵심 용어
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Metadata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 왜 중요한가?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-pyramid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Data Pyramid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-model-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Model Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-action-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Action Chunking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-action-flow-matching-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Action Flow Matching Objective
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-inference-euler-denoising" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Inference: Euler Denoising
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-latent-actions-for-action-less-videos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Latent Actions for Action-Less Videos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-neural-trajectories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Neural Trajectories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-teleoperation-and-real-robot-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Teleoperation and Real Robot Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-simulation-and-real-world-benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Simulation and Real-World Benchmarks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-quantitative-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quantitative Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-neural-trajectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Neural Trajectory 효과
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-physical-ai-world-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Physical AI / World Model 관점
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 기존 논문들과의 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 한계와 주의점
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 발표 구성 제안
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 토론 질문
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. 한 문장 정리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLA Reasoning & Physical Grounding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VLA Reasoning & Physical Grounding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V1. CogACT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V2. Diffusion-VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V3. CoT-VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4. SpatialVLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V5. RoboMamba
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V6. RoboBrain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V7. Gemini Robotics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V8. PhysVLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    World Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W1. Free-Energy Principle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W2. DreamerV3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W3. Scalable World Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W4. Genie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W5. Genie 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W6. Pandora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W7. LLMR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W8. UniSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W9. GAIA-1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W10. DreamGen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W11. Cosmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W12. DreamZero / WAM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety & Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Safety & Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E1. SAM-6D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E2. Code-as-Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E3. RoboArena
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E4. LIBERO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E5. Active Inference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_9" id="__nav_6_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications & Extensions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applications & Extensions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1. ProAgent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2. REVECA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3. Multi-Agent Resilience
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4. Synergistic MAS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5. BotSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6. Debate on Graph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7. RADiT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A8. Generalist Medical AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A9. Wearable Biomarkers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A10. SleepFM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corpus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Corpus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../corpus/download_extract_status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extraction Status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../corpus/extracted_reading_evidence_snippets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidence Snippets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 읽기 전 약어 및 핵심 용어
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Metadata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 왜 중요한가?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-pyramid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Data Pyramid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-model-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Model Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-action-chunking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Action Chunking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-action-flow-matching-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Action Flow Matching Objective
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-inference-euler-denoising" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Inference: Euler Denoising
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-latent-actions-for-action-less-videos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Latent Actions for Action-Less Videos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-neural-trajectories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Neural Trajectories
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-teleoperation-and-real-robot-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Teleoperation and Real Robot Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-simulation-and-real-world-benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Simulation and Real-World Benchmarks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-quantitative-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quantitative Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-neural-trajectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Neural Trajectory 효과
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-physical-ai-world-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Physical AI / World Model 관점
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 기존 논문들과의 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 한계와 주의점
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. 발표 구성 제안
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. 토론 질문
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. 한 문장 정리
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="p6-gr00t-n1-an-open-foundation-model-for-generalist-humanoid-robots">P6. GR00T N1: An Open Foundation Model for Generalist Humanoid Robots<a class="headerlink" href="#p6-gr00t-n1-an-open-foundation-model-for-generalist-humanoid-robots" title="Permanent link">&para;</a></h1>
+<h2 id="0">0. 읽기 전 약어 및 핵심 용어<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>이 문서를 읽기 전에 아래 약어와 용어를 먼저 정리한다. 이후 본문에서는 괄호 안의 약어를 사용한다.</p>
+<ul>
+<li>Artificial Intelligence (AI): 사람의 지각, 추론, 학습, 의사결정 능력을 기계가 수행하도록 만드는 인공지능 분야를 뜻한다.</li>
+<li>Vision-Language Model (VLM): 이미지와 텍스트를 함께 입력받아 시각-언어 이해나 생성 작업을 수행하는 모델이다.</li>
+<li>Vision-Language-Action (VLA): 시각 관측과 언어 명령을 함께 받아 로봇 action까지 생성하는 모델 또는 학습 패러다임이다.</li>
+<li>Behavior Cloning (BC): expert demonstration의 observation-action pair를 supervised learning으로 모방하는 imitation learning 방법이다.</li>
+<li>Multi-Layer Perceptron (MLP): fully connected layer를 여러 층 쌓은 feed-forward neural network이다.</li>
+<li>Variational Autoencoder (VAE): latent variable의 확률분포를 학습해 data를 생성하거나 압축하는 generative model이다.</li>
+<li>Vector Quantization (VQ): continuous representation을 discrete codebook vector로 양자화하는 방법이다.</li>
+<li>Vector-Quantized Variational Autoencoder (VQ-VAE): latent를 discrete codebook으로 양자화하는 variational autoencoder 계열 generative model이다.</li>
+<li>Diffusion Probabilistic Model (DPM): data에 noise를 더하고 이를 되돌리는 denoising process를 학습하는 generative model 계열이다.</li>
+<li>Diffusion Transformer (DiT): U-Net 대신 transformer backbone을 사용해 diffusion denoising이나 flow prediction을 수행하는 architecture이다.</li>
+<li>Robotics Transformer (RT): robot observation을 입력받아 action을 예측하는 transformer 기반 robot policy 계열을 뜻한다.</li>
+<li>Robotics Transformer-X model family (RT-X): Open X-Embodiment 데이터 위에서 여러 robot embodiment로 확장한 RT 계열 policy family를 뜻한다.</li>
+<li>Action Chunking with Transformers (ACT): 여러 timestep의 action chunk를 한 번에 예측해 fine-grained robot manipulation을 학습하는 transformer policy이다.</li>
+<li>Robotics Diffusion Transformer (RDT): diffusion model과 transformer를 결합해 robot action trajectory를 생성하는 robot foundation policy 계열이다.</li>
+<li>Robotics Diffusion Transformer 1B (RDT-1B): 약 1B parameter 규모의 bimanual manipulation diffusion foundation model이다.</li>
+<li>Physical Intelligence pi-zero model (pi0): Physical Intelligence가 제안한 general robot control용 vision-language-action flow model이다.</li>
+<li>Physical Intelligence pi-zero-point-five model (pi0.5): pi0를 open-world household manipulation으로 확장한 VLA model이다.</li>
+<li>Generalist Robot 1 (GR-1): video와 language를 조건으로 humanoid action을 생성하는 generalist robot policy 계열 모델이다.</li>
+<li>Generalist Robot 1 (GR1): GR-1을 하이픈 없이 줄여 쓴 표기이며 humanoid/generalist robot policy 계열을 뜻한다.</li>
+<li>Generalist Robot 00 Technology (GR00T): NVIDIA가 humanoid/generalist robot을 위해 공개한 robot foundation model family 이름이다.</li>
+<li>Inverse Dynamics Model (IDM): 현재와 다음 관측을 보고 그 변화를 만든 action을 추정하는 model이다.</li>
+<li>Latent Action Pretraining from videos (LAPA): video에서 latent action representation을 학습해 downstream robot policy에 활용하는 pretraining 계열 접근이다.</li>
+<li>Graphics Processing Unit (GPU): 대규모 neural network 학습과 병렬 연산을 빠르게 수행하는 processor이다.</li>
+<li>Physical Artificial Intelligence (Physical AI): 디지털 공간의 예측을 넘어 물리 세계에서 지각, 예측, 계획, 행동, 안전 검사를 수행하는 AI 시스템을 뜻한다.</li>
+</ul>
+<h2 id="1-metadata">1. Metadata<a class="headerlink" href="#1-metadata" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td><code>P6</code></td>
+</tr>
+<tr>
+<td>Title</td>
+<td>GR00T N1: An Open Foundation Model for Generalist Humanoid Robots</td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>NVIDIA, Johan Bjorck, Fernando Castañeda, Nikita Cherniadev et al.</td>
+</tr>
+<tr>
+<td>Affiliation / Team</td>
+<td>NVIDIA</td>
+</tr>
+<tr>
+<td>Venue / Status</td>
+<td>arXiv technical report</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2025-03-18</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>https://arxiv.org/abs/2503.14734</td>
+</tr>
+<tr>
+<td>Local source</td>
+<td><code>paper_corpus/sources/P6</code></td>
+</tr>
+<tr>
+<td>Source figures</td>
+<td><code>paper_corpus/figures_source/P6/manifest.md</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 핵심 요약<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>GR00T N1은 generalist humanoid robots를 위한 open Vision-Language-Action foundation model이다. 이 논문은 humanoid robot intelligence를 hardware, model, data의 full-stack 문제로 보고, robot foundation model을 학습하기 위해 human video, simulation/neural synthetic data, real robot trajectories를 data pyramid로 구성한다.</p>
+<p>모델은 dual-system architecture를 사용한다. System 2는 Eagle-2 VLM 기반 vision-language reasoning module이고, System 1은 action flow-matching으로 학습되는 Diffusion Transformer action module이다. VLM은 image/language를 token으로 해석하고, DiT는 proprioception과 noised action chunk를 vision-language token에 cross-attention해 high-frequency motor action을 생성한다.</p>
+<h2 id="3">3. 왜 중요한가?<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>humanoid robot을 대상으로 한 대규모 open foundation model 사례다.</li>
+<li>VLA를 단순 arm manipulation이 아니라 single-arm, bimanual, humanoid embodiments까지 확장한다.</li>
+<li>web/human video, simulation, neural-generated videos, real-robot trajectories를 하나의 training corpus로 묶는 data pyramid 관점을 제시한다.</li>
+<li>action label이 없는 human/neural video를 latent action 또는 IDM pseudo-action으로 policy training에 활용한다.</li>
+<li>pi0/RDT처럼 diffusion/flow 계열 continuous action generation을 foundation model scale에서 사용한다.</li>
+<li>real GR-1 humanoid robot에서 low-data post-training 성능과 data efficiency를 보고한다.</li>
+</ul>
+<h2 id="4-data-pyramid">4. Data Pyramid<a class="headerlink" href="#4-data-pyramid" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_19_data_pyramid.png" width="680">
+</p>
+<p align="center"><em>Figure 1. Data pyramid for robot foundation model training. 아래로 갈수록 data quantity가 많고 embodiment-specificity가 낮으며, 위로 갈수록 real robot grounding이 강하다. Source figure: <code>assets/data_pyramid.pdf</code>.</em></p>
+
+<p>GR00T N1의 가장 큰 메시지는 "humanoid robot에는 Internet-scale robot action dataset이 없으므로, data를 계층적으로 만들어야 한다"는 것이다.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Data type</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base</td>
+<td>web data, human egocentric videos</td>
+<td>broad visual/behavioral prior</td>
+</tr>
+<tr>
+<td>middle</td>
+<td>simulation trajectories, neural-generated videos</td>
+<td>scalable counterfactual robot experience</td>
+</tr>
+<tr>
+<td>top</td>
+<td>real humanoid teleoperation trajectories</td>
+<td>embodiment-specific grounding</td>
+</tr>
+</tbody>
+</table>
+<p>이 구조는 Open X-Embodiment식 "robot datasets pooling"에서 한 걸음 더 나아가, action label이 없는 video와 generated trajectory까지 policy training에 끌어들이려는 시도다.</p>
+<h2 id="5-model-overview">5. Model Overview<a class="headerlink" href="#5-model-overview" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_20_groot_inference_yuke_v2.png" width="760">
+</p>
+<p align="center"><em>Figure 2. GR00T N1 model overview. Image observation과 language instruction은 VLM backbone을 거치고, VLM output token은 robot state/action encoding과 함께 Diffusion Transformer action module에 들어간다. Source figure: <code>assets/groot_inference_yuke_v2.pdf</code>.</em></p>
+
+<p>GR00T N1은 두 개의 system으로 나뉜다.</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Module</th>
+<th>기능</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System 2</td>
+<td>Eagle-2 VLM</td>
+<td>vision-language reasoning, task/environment interpretation</td>
+<td>약 10 Hz</td>
+</tr>
+<tr>
+<td>System 1</td>
+<td>DiT action module</td>
+<td>closed-loop motor action generation</td>
+<td>약 120 Hz</td>
+</tr>
+</tbody>
+</table>
+<p>publicly released GR00T N1 model은 총 2.2B parameters이고, 그중 VLM이 1.34B parameters다. 논문은 L40 GPU에서 16-action chunk sampling inference time이 63.9 ms라고 보고한다.</p>
+<h2 id="6-model-architecture">6. Model Architecture<a class="headerlink" href="#6-model-architecture" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_21_groot_model_v6.png" width="760">
+</p>
+<p align="center"><em>Figure 3. GR00T N1 model architecture. Embodiment-aware state/action encoders and decoders handle variable state/action dimensions; Eagle-2 VLM tokens condition DiT blocks through cross-attention. Source figure: <code>assets/groot_model_v6.pdf</code>.</em></p>
+
+<p>architecture의 핵심은 heterogeneous embodiment를 처리하기 위한 compositional design이다.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>state encoder</td>
+<td>embodiment별 MLP가 robot proprioceptive state를 shared embedding으로 projection</td>
+</tr>
+<tr>
+<td>action encoder</td>
+<td>noised action chunk와 diffusion/flow timestep을 embedding</td>
+</tr>
+<tr>
+<td>VLM backbone</td>
+<td>Eagle-2가 image와 language를 vision-language token으로 변환</td>
+</tr>
+<tr>
+<td>DiT blocks</td>
+<td>noised action/state token에 self-attention, VLM token에 cross-attention</td>
+</tr>
+<tr>
+<td>action decoder</td>
+<td>embodiment별 MLP가 DiT output을 해당 robot action dimension으로 변환</td>
+</tr>
+</tbody>
+</table>
+<p>이 설계는 RDT의 unified action space와 조금 다르다. RDT는 physical vector coordinate를 공유하고, GR00T N1은 embodiment-specific encoder/decoder로 서로 다른 state/action dimension을 shared latent space에 올린다.</p>
+<h2 id="7-action-chunking">7. Action Chunking<a class="headerlink" href="#7-action-chunking" title="Permanent link">&para;</a></h2>
+<p>GR00T N1도 action chunk를 예측한다.</p>
+<div class="arithmatex">\[
+A_t
+=
+[a_t,a_{t+1},\ldots,a_{t+H-1}]
+\]</div>
+<div class="arithmatex">\[
+H=16
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A_t\)</span></td>
+<td>time <span class="arithmatex">\(t\)</span>에서 예측하는 action chunk</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a_t\)</span></td>
+<td>time <span class="arithmatex">\(t\)</span>의 single-step robot action</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H\)</span></td>
+<td>action chunk horizon</td>
+</tr>
+</tbody>
+</table>
+<p>action chunking은 ACT, Diffusion Policy, RDT, pi0 계열과 이어지는 공통 설계다. high-frequency control에서 매 순간 완전히 새로 action을 뽑기보다, 짧은 trajectory segment를 생성해 temporal smoothness와 inference efficiency를 얻는다.</p>
+<h2 id="8-action-flow-matching-objective">8. Action Flow Matching Objective<a class="headerlink" href="#8-action-flow-matching-objective" title="Permanent link">&para;</a></h2>
+<p>GR00T N1은 diffusion transformer를 사용하지만, training objective는 action flow matching이다. ground-truth action chunk <span class="arithmatex">\(A_t\)</span>, flow-matching timestep <span class="arithmatex">\(\tau\)</span>, Gaussian noise <span class="arithmatex">\(\epsilon\)</span>이 주어졌을 때 noised action chunk는 다음과 같다.</p>
+<div class="arithmatex">\[
+A_t^{\tau}
+=
+\tau A_t
++
+(1-\tau)\epsilon
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A_t\)</span></td>
+<td>clean ground-truth action chunk</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A_t^{\tau}\)</span></td>
+<td>timestep <span class="arithmatex">\(\tau\)</span>에서의 noised/interpolated action chunk</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tau\)</span></td>
+<td>flow-matching timestep, <span class="arithmatex">\([0,1]\)</span> 범위</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\epsilon\)</span></td>
+<td>Gaussian noise, <span class="arithmatex">\(\epsilon\sim\mathcal{N}(\mathbf{0},\mathbf{I})\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>모델 <span class="arithmatex">\(V_{\theta}\)</span>는 denoising vector field를 예측하도록 학습된다.</p>
+<div class="arithmatex">\[
+\mathcal{L}_{\mathrm{fm}}(\theta)
+=
+\mathbb{E}_{\tau}
+\left[
+\left\|
+V_{\theta}(\phi_t,A_t^{\tau},q_t)
+-
+(\epsilon-A_t)
+\right\|^2
+\right]
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathcal{L}_{\mathrm{fm}}(\theta)\)</span></td>
+<td>flow-matching loss</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\theta\)</span></td>
+<td>action module parameter</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V_{\theta}\)</span></td>
+<td>DiT action module이 예측하는 vector field</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\phi_t\)</span></td>
+<td>VLM이 출력한 vision-language token embeddings</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(q_t\)</span></td>
+<td>robot proprioceptive state embedding</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\epsilon-A_t\)</span></td>
+<td>noise에서 clean action으로 가기 위한 target vector field</td>
+</tr>
+</tbody>
+</table>
+<p>논문은 pi0와 마찬가지로 <span class="arithmatex">\(\tau\)</span>를 Beta distribution에서 sampling한다고 설명한다.</p>
+<div class="arithmatex">\[
+p(\tau)
+=
+\mathrm{Beta}\left(\frac{s-\tau}{s};1.5,1\right),
+\quad
+s=0.999
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(p(\tau)\)</span></td>
+<td>flow-matching timestep sampling distribution</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s\)</span></td>
+<td>sampling distribution parameter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-inference-euler-denoising">9. Inference: Euler Denoising<a class="headerlink" href="#9-inference-euler-denoising" title="Permanent link">&para;</a></h2>
+<p>inference에서는 random Gaussian action chunk에서 시작해 <span class="arithmatex">\(K\)</span> step denoising으로 action을 생성한다.</p>
+<div class="arithmatex">\[
+A_t^0
+\sim
+\mathcal{N}(\mathbf{0},\mathbf{I})
+\]</div>
+<div class="arithmatex">\[
+A_t^{\tau+1/K}
+=
+A_t^{\tau}
++
+\frac{1}{K}
+V_{\theta}(\phi_t,A_t^{\tau},q_t)
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A_t^0\)</span></td>
+<td>initial random action chunk</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(K\)</span></td>
+<td>inference denoising step 수</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A_t^{\tau+1/K}\)</span></td>
+<td>Euler integration 후 업데이트된 action chunk</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V_{\theta}(\phi_t,A_t^{\tau},q_t)\)</span></td>
+<td>현재 action chunk에서의 denoising direction</td>
+</tr>
+</tbody>
+</table>
+<p>논문은 모든 embodiment에서 <span class="arithmatex">\(K=4\)</span> inference steps가 잘 작동했다고 보고한다. RDT가 DPM-Solver++로 diffusion steps를 줄였다면, GR00T N1은 flow matching과 Euler integration으로 적은 step action generation을 수행한다.</p>
+<h2 id="10-latent-actions-for-action-less-videos">10. Latent Actions for Action-Less Videos<a class="headerlink" href="#10-latent-actions-for-action-less-videos" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_22_latent_action.png" width="720">
+</p>
+<p align="center"><em>Figure 4. Latent actions. 서로 다른 robot/human embodiment에서 유사한 latent action embedding이 오른팔/손을 왼쪽 또는 오른쪽으로 움직이는 의미를 공유하는 예시다. Source figure: <code>assets/latent_action.pdf</code>.</em></p>
+
+<p>human egocentric video와 neural-generated video에는 robot action label이 없다. GR00T N1은 이를 학습에 쓰기 위해 VQ-VAE 기반 latent action model을 학습한다.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>input</td>
+<td>current frame <span class="arithmatex">\(x_t\)</span>와 future frame <span class="arithmatex">\(x_{t+H}\)</span></td>
+</tr>
+<tr>
+<td>encoder</td>
+<td>두 frame 사이 변화를 latent action <span class="arithmatex">\(z_t\)</span>로 encoding</td>
+</tr>
+<tr>
+<td>codebook</td>
+<td>continuous embedding을 nearest codebook embedding으로 quantize</td>
+</tr>
+<tr>
+<td>decoder</td>
+<td><span class="arithmatex">\(x_t\)</span>와 <span class="arithmatex">\(z_t\)</span>로 <span class="arithmatex">\(x_{t+H}\)</span> reconstruction</td>
+</tr>
+<tr>
+<td>policy training</td>
+<td>trained encoder를 inverse dynamics model처럼 사용해 action-less video에 latent action label 부여</td>
+</tr>
+</tbody>
+</table>
+<p>이 아이디어의 중요성은 "robot action label이 없어도, frame transition을 action-like supervision으로 바꿀 수 있다"는 점이다.</p>
+<h2 id="11-neural-trajectories">11. Neural Trajectories<a class="headerlink" href="#11-neural-trajectories" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_23_dreams_0318.png" width="620">
+</p>
+<p align="center"><em>Figure 5. Synthetically generated videos. 같은 initial frame에서 다른 prompt, object, target location을 생성해 counterfactual robot trajectories를 만든다. Source figure: <code>assets/dreams_0318.pdf</code>.</em></p>
+
+<p>GR00T N1은 video generation model을 robot data augmentation에 사용한다. in-house teleoperation 88 hours를 바탕으로 image-to-video generation model을 fine-tune하고, novel language prompts와 initial frames로 827 hours의 videos를 생성한다. 이는 약 10배 augmentation이다.</p>
+<p>neural trajectories는 language instruction을 따르는지 filtering하고 captioning한 뒤, latent action 또는 inverse dynamics model(IDM) pseudo-action으로 labeling해 policy training에 사용한다.</p>
+<h2 id="12-teleoperation-and-real-robot-data">12. Teleoperation and Real Robot Data<a class="headerlink" href="#12-teleoperation-and-real-robot-data" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_10_groot-teleop.png" width="760">
+</p>
+<p align="center"><em>Figure 6. Data collection via teleoperation. Wrist poses, hand skeletons, and robot actions are captured through teleoperation and retargeting. Source figure: <code>assets/groot-teleop.pdf</code>.</em></p>
+
+<p>GR00T N1의 real-world data는 Fourier GR1 humanoid 중심으로 수집된다. VIVE Ultimate Tracker로 wrist pose를, Xsens Metagloves로 finger movement를 추적하고, 이를 inverse kinematics로 humanoid action에 retargeting한다. real-time teleoperation은 20 Hz control frequency로 동작하며, head-mounted camera image와 low-dimensional proprioception/action을 함께 기록한다.</p>
+<h2 id="13-simulation-and-real-world-benchmarks">13. Simulation and Real-World Benchmarks<a class="headerlink" href="#13-simulation-and-real-world-benchmarks" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_14_fig_task_v6.png" width="760">
+</p>
+<p align="center"><em>Figure 7. Simulation tasks. RoboCasa, DexMimicGen, GR-1 tabletop tasks를 포함해 다양한 embodiment와 manipulation task를 평가한다. Source figure: <code>assets/fig_task_v6.pdf</code>.</em></p>
+
+<p>simulation benchmark는 세 종류다.</p>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>규모</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RoboCasa Kitchen</td>
+<td>24 tasks</td>
+<td>Panda arm 기반 kitchen atomic skills</td>
+</tr>
+<tr>
+<td>DexMimicGen Cross-Embodiment</td>
+<td>9 tasks</td>
+<td>bimanual/dexterous/humanoid coordination</td>
+</tr>
+<tr>
+<td>GR-1 Tabletop Tasks</td>
+<td>24 tasks</td>
+<td>real-world humanoid tasks와 유사한 tabletop manipulation</td>
+</tr>
+</tbody>
+</table>
+<p>real-world benchmark는 GR-1 humanoid에서 수행된다.</p>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_15_real_gr1_task_figure.png" width="640">
+</p>
+<p align="center"><em>Figure 8. Real-world GR-1 tasks. Pre-training evaluation과 post-training evaluation task categories를 보여준다. Source figure: <code>assets/real_gr1_task_figure.pdf</code>.</em></p>
+
+<table>
+<thead>
+<tr>
+<th>Real-world category</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object-to-Container Pick-and-Place</td>
+<td>object를 지정된 container로 이동</td>
+</tr>
+<tr>
+<td>Articulated Object Manipulation</td>
+<td>chest/cabinet/drawer에 넣고 닫기</td>
+</tr>
+<tr>
+<td>Industrial Object Manipulation</td>
+<td>machinery packing, mesh cup pouring, cylinder handover</td>
+</tr>
+<tr>
+<td>Multi-Agent Coordination</td>
+<td>두 robot 사이 handover와 sequential coordination</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-quantitative-results">14. Quantitative Results<a class="headerlink" href="#14-quantitative-results" title="Permanent link">&para;</a></h2>
+<p>pretrained GR00T N1 checkpoint는 real GR-1에서 두 가지 generalization task를 수행한다. left-to-right handover setting에서 76.6%, novel object into unseen target container setting에서 73.3% success를 보고한다.</p>
+<p>post-training simulation에서는 100 demonstrations per task 기준으로 다음 성능을 보고한다.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">RoboCasa</th>
+<th style="text-align: right;">DexMG</th>
+<th style="text-align: right;">GR-1</th>
+<th style="text-align: right;">Average</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BC Transformer</td>
+<td style="text-align: right;">26.3%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;">16.1%</td>
+<td style="text-align: right;">26.4%</td>
+</tr>
+<tr>
+<td>Diffusion Policy</td>
+<td style="text-align: right;">25.6%</td>
+<td style="text-align: right;">56.1%</td>
+<td style="text-align: right;">32.7%</td>
+<td style="text-align: right;">33.4%</td>
+</tr>
+<tr>
+<td>GR00T N1</td>
+<td style="text-align: right;">32.1%</td>
+<td style="text-align: right;">66.5%</td>
+<td style="text-align: right;">50.0%</td>
+<td style="text-align: right;">45.0%</td>
+</tr>
+</tbody>
+</table>
+<p>real robot에서는 Diffusion Policy baseline과 비교한다.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">Pick-and-Place</th>
+<th style="text-align: right;">Articulated</th>
+<th style="text-align: right;">Industrial</th>
+<th style="text-align: right;">Coordination</th>
+<th style="text-align: right;">Average</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Diffusion Policy, 10% Data</td>
+<td style="text-align: right;">3.0%</td>
+<td style="text-align: right;">14.3%</td>
+<td style="text-align: right;">6.7%</td>
+<td style="text-align: right;">27.5%</td>
+<td style="text-align: right;">10.2%</td>
+</tr>
+<tr>
+<td>Diffusion Policy, Full Data</td>
+<td style="text-align: right;">36.0%</td>
+<td style="text-align: right;">38.6%</td>
+<td style="text-align: right;">61.0%</td>
+<td style="text-align: right;">62.5%</td>
+<td style="text-align: right;">46.4%</td>
+</tr>
+<tr>
+<td>GR00T N1, 10% Data</td>
+<td style="text-align: right;">35.0%</td>
+<td style="text-align: right;">62.0%</td>
+<td style="text-align: right;">31.0%</td>
+<td style="text-align: right;">50.0%</td>
+<td style="text-align: right;">42.6%</td>
+</tr>
+<tr>
+<td>GR00T N1, Full Data</td>
+<td style="text-align: right;">82.0%</td>
+<td style="text-align: right;">70.9%</td>
+<td style="text-align: right;">70.0%</td>
+<td style="text-align: right;">82.5%</td>
+<td style="text-align: right;">76.8%</td>
+</tr>
+</tbody>
+</table>
+<p>핵심 관찰은 GR00T N1의 10% data 성능이 Diffusion Policy full-data 성능에 근접한다는 점이다. 논문은 이를 pretraining과 data pyramid가 post-training data efficiency를 높인 결과로 해석한다.</p>
+<h2 id="15-neural-trajectory">15. Neural Trajectory 효과<a class="headerlink" href="#15-neural-trajectory" title="Permanent link">&para;</a></h2>
+<p align="center">
+  <img src="../../figures_source/P6/P6_srcfig_18_dream_figure.png" width="720">
+</p>
+<p align="center"><em>Figure 9. Neural trajectories ablations. RoboCasa와 real-world low-data regime에서 generated trajectories를 함께 학습했을 때의 효과를 비교한다. Source figure: <code>assets/dream_figure.pdf</code>.</em></p>
+
+<p>neural trajectory co-training은 RoboCasa에서 30/100/300 data regime 각각 평균 +4.2%, +8.8%, +6.8% gain을 보였고, real GR-1에서도 8 tasks 평균 +5.8% gain을 보고한다. action labeling 방식은 LAPA latent action과 IDM pseudo-action을 비교하며, data가 많아질수록 IDM label이 더 강한 positive transfer를 보였다고 설명한다.</p>
+<h2 id="16-physical-ai-world-model">16. Physical AI / World Model 관점<a class="headerlink" href="#16-physical-ai-world-model" title="Permanent link">&para;</a></h2>
+<p>GR00T N1은 world model 자체를 policy 내부에 명시적으로 두지는 않는다. 하지만 video generation model을 neural trajectory generator로 사용한다는 점에서 world model과 physical AI가 직접 만나는 사례다.</p>
+<table>
+<thead>
+<tr>
+<th>관점</th>
+<th>GR00T N1의 의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>world model as data engine</td>
+<td>video generation model이 counterfactual robot trajectory를 생성한다.</td>
+</tr>
+<tr>
+<td>action-less video supervision</td>
+<td>latent action/IDM으로 human video와 generated video를 action-labeled data처럼 사용한다.</td>
+</tr>
+<tr>
+<td>embodiment-aware policy</td>
+<td>heterogeneous state/action dimension을 embodiment-specific adapter로 처리한다.</td>
+</tr>
+<tr>
+<td>humanoid grounding</td>
+<td>data pyramid top layer에서 real GR-1 trajectories로 physical grounding을 확보한다.</td>
+</tr>
+</tbody>
+</table>
+<p>스터디에서는 GR00T N1을 "world model을 policy의 planner로 쓰는 방식"이 아니라 "world model을 robot data generation engine으로 쓰는 방식"으로 읽으면 좋다.</p>
+<h2 id="17">17. 기존 논문들과의 연결<a class="headerlink" href="#17" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>연결 논문</th>
+<th>연결 포인트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Diffusion Policy (<code>P1</code>)</td>
+<td>continuous action generation baseline 및 action chunking</td>
+</tr>
+<tr>
+<td>RDT-1B (<code>P3</code>)</td>
+<td>DiT 기반 action generation, heterogeneous robot data, large-scale pretraining</td>
+</tr>
+<tr>
+<td>pi0 / pi0.5 (<code>P4</code>, <code>P5</code>)</td>
+<td>flow matching 기반 VLA action generation</td>
+</tr>
+<tr>
+<td>Open X-Embodiment / RT-X (<code>D1</code>)</td>
+<td>cross-embodiment data pooling</td>
+</tr>
+<tr>
+<td>OpenVLA (<code>D5</code>)</td>
+<td>VLA architecture와 action representation 비교</td>
+</tr>
+<tr>
+<td>Genie / Pandora / DreamGen (<code>W4</code>, <code>W6</code>, <code>W10</code>)</td>
+<td>generated video/world model을 physical AI data source로 활용하는 흐름</td>
+</tr>
+</tbody>
+</table>
+<h2 id="18">18. 한계와 주의점<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<ul>
+<li>논문이 다루는 task는 주로 short-horizon tabletop manipulation이다.</li>
+<li>long-horizon loco-manipulation은 future work로 남아 있다.</li>
+<li>neural trajectories는 물리 법칙과 instruction following을 항상 만족하지 않아 filtering 품질이 중요하다.</li>
+<li>training compute가 매우 크다. 논문은 GR00T N1 large pretraining에 약 50,000 H100 GPU hours를 보고한다.</li>
+<li>humanoid real-world evaluation은 강력하지만, 다양한 산업 현장/가정 환경에서의 robustness는 아직 별도 검증이 필요하다.</li>
+</ul>
+<h2 id="19">19. 발표 구성 제안<a class="headerlink" href="#19" title="Permanent link">&para;</a></h2>
+<ol>
+<li>"humanoid robot에는 Internet-scale action dataset이 없다"는 문제로 시작한다.</li>
+<li>data pyramid figure로 human video, simulation/neural data, real robot data의 역할을 설명한다.</li>
+<li>dual-system model overview로 VLM reasoning과 DiT action module의 분업을 설명한다.</li>
+<li>flow matching loss와 Euler inference update를 pi0/RDT와 비교한다.</li>
+<li>latent action figure로 action-less video를 robot policy supervision으로 바꾸는 아이디어를 설명한다.</li>
+<li>simulation/real-world result table로 data efficiency를 강조한다.</li>
+<li>마지막에 GR00T N1을 "world model을 데이터 생성기로 쓰는 physical AI foundation model"로 정리한다.</li>
+</ol>
+<h2 id="20">20. 토론 질문<a class="headerlink" href="#20" title="Permanent link">&para;</a></h2>
+<ul>
+<li>humanoid robot에서 embodiment-specific encoder/decoder 방식과 RDT식 unified physical vector 방식 중 무엇이 더 확장성이 좋을까?</li>
+<li>generated videos가 실제 robot dynamics와 다를 때 policy에 negative transfer를 줄 위험은 어떻게 줄일 수 있을까?</li>
+<li>latent action은 human embodiment와 robot embodiment 사이에서 어떤 수준의 공통 의미를 학습할 수 있을까?</li>
+<li>world model을 data generation에 쓰는 방식과 planning/rollout에 직접 쓰는 방식은 어떻게 결합될 수 있을까?</li>
+<li>산업 현장에서는 real data collection, simulation, neural trajectory generation 중 어느 layer가 가장 큰 병목이 될까?</li>
+</ul>
+<h2 id="21">21. 한 문장 정리<a class="headerlink" href="#21" title="Permanent link">&para;</a></h2>
+<p>GR00T N1은 humanoid robot foundation model을 만들기 위해 VLM reasoning, flow-matching DiT action generation, data pyramid, latent/neural action supervision을 결합한 NVIDIA의 대규모 open VLA 모델이다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/site.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4209 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Physical AI & World Model paper study notes, curriculum, and related works.">
+      
+      
+        <meta name="author" content="Physical AI & World Model Study">
+      
+      
+        <link rel="canonical" href="https://tootouch.github.io/physical-ai-world-model-study/papers/D5/">
+      
+      
+        <link rel="prev" href="../D4/">
+      
+      
+        <link rel="next" href="../D6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>D5. OpenVLA - Physical AI & World Model Study</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+KR:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans KR";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#d5-openvla-an-open-source-vision-language-action-model" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Physical AI &amp; World Model Study" class="md-header__button md-logo" aria-label="Physical AI & World Model Study" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.41 4 16 6.41v.18L18.41 9H22v2h-4.41L16 9.41V12h-1a2 2 0 0 1-2-2V7.5H9.86c-.09.37-.24.72-.44 1.05L15.18 19H20a2 2 0 0 1 2 2v1H2v-1a2 2 0 0 1 2-2h6.61l-4.69-8.5a4.006 4.006 0 0 1-3.81-3A4 4 0 0 1 5 2.63c2.13-.55 4.31.73 4.86 2.87H13V3a2 2 0 0 1 2-2h1v2.59L17.59 2H22v2zM6 4.5a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Physical AI & World Model Study
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              D5. OpenVLA
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tootouch/physical-ai-world-model-study" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tootouch/physical-ai-world-model-study
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../integrated/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  통합 문서
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../curriculum/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  커리큘럼
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../related_works/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Related Works
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../metadata/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Metadata
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Paper Notes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../corpus/download_extract_status/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Corpus
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Physical AI &amp; World Model Study" class="md-nav__button md-logo" aria-label="Physical AI & World Model Study" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.41 4 16 6.41v.18L18.41 9H22v2h-4.41L16 9.41V12h-1a2 2 0 0 1-2-2V7.5H9.86c-.09.37-.24.72-.44 1.05L15.18 19H20a2 2 0 0 1 2 2v1H2v-1a2 2 0 0 1 2-2h6.61l-4.69-8.5a4.006 4.006 0 0 1-3.81-3A4 4 0 0 1 5 2.63c2.13-.55 4.31.73 4.86 2.87H13V3a2 2 0 0 1 2-2h1v2.59L17.59 2H22v2zM6 4.5a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg>
+
+    </a>
+    Physical AI & World Model Study
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tootouch/physical-ai-world-model-study" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tootouch/physical-ai-world-model-study
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    통합 문서
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    커리큘럼
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../related_works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Related Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper Notes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Paper Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Survey
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Survey
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S1. Robotics with Foundation Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S2. VLA Survey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S3. Embodied AI Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S4. World Models for Embodied AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../S5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    S5. Anatomy of VLA Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generalist & VLA Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generalist & VLA Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G1. Gato
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G2. SayCan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G3. VIMA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G4. RT-1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G5. PaLM-E
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../G6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    G6. RT-2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Data & Open Policies
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robot Data & Open Policies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1. Open X-Embodiment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2. ALOHA / ACT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3. DROID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4. Octo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5. OpenVLA
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5. OpenVLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 읽기 전 약어 및 핵심 용어
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Metadata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 왜 중요한가?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 전체 개념
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-action-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Action Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-next-token-action-prediction-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Next-Token Action Prediction Objective
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-training-data-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Training Data와 Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-direct-evaluation-generalist-robot-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Direct Evaluation: Generalist Robot Control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-fine-tuning-to-new-robot-setups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Fine-Tuning to New Robot Setups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parameter-efficient-fine-tuning-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parameter-Efficient Fine-Tuning과 Quantization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-d1-open-x-embodiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. D1 Open X-Embodiment와의 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-world-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. World Model 관점에서의 위치
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 한계
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 후속 연구와 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 발표 구성 추천
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 발표 질문
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 요약 코멘트
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6. X-VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../D7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7. Continual VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Robot Foundation Policies
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Robot Foundation Policies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P1. Diffusion Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P2. 3D Diffusion Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P3. RDT-1B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P4. pi0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P5. pi0.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../P6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    P6. GR00T N1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VLA Reasoning & Physical Grounding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VLA Reasoning & Physical Grounding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V1. CogACT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V2. Diffusion-VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V3. CoT-VLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V4. SpatialVLA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V5. RoboMamba
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V6. RoboBrain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V7. Gemini Robotics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V8. PhysVLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    World Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W1. Free-Energy Principle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W2. DreamerV3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W3. Scalable World Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W4. Genie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W5. Genie 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W6. Pandora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W7. LLMR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W8. UniSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W9. GAIA-1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W10. DreamGen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W11. Cosmos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../W12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    W12. DreamZero / WAM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety & Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Safety & Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E1. SAM-6D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E2. Code-as-Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E3. RoboArena
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E4. LIBERO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../E5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E5. Active Inference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_9" id="__nav_6_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications & Extensions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Applications & Extensions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1. ProAgent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2. REVECA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3. Multi-Agent Resilience
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4. Synergistic MAS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5. BotSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6. Debate on Graph
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7. RADiT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A8. Generalist Medical AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A9. Wearable Biomarkers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A10. SleepFM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corpus
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Corpus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../corpus/download_extract_status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extraction Status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../corpus/extracted_reading_evidence_snippets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidence Snippets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 읽기 전 약어 및 핵심 용어
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Metadata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 왜 중요한가?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 전체 개념
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-model-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Model Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-action-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Action Tokenization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-next-token-action-prediction-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Next-Token Action Prediction Objective
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-training-data-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Training Data와 Design Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-direct-evaluation-generalist-robot-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Direct Evaluation: Generalist Robot Control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-fine-tuning-to-new-robot-setups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Fine-Tuning to New Robot Setups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parameter-efficient-fine-tuning-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parameter-Efficient Fine-Tuning과 Quantization
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-d1-open-x-embodiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. D1 Open X-Embodiment와의 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-world-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. World Model 관점에서의 위치
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. 한계
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. 후속 연구와 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. 발표 구성 추천
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. 발표 질문
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. 요약 코멘트
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="d5-openvla-an-open-source-vision-language-action-model">D5. OpenVLA: An Open-Source Vision-Language-Action Model<a class="headerlink" href="#d5-openvla-an-open-source-vision-language-action-model" title="Permanent link">&para;</a></h1>
+<h2 id="0">0. 읽기 전 약어 및 핵심 용어<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>이 문서를 읽기 전에 아래 약어와 용어를 먼저 정리한다. 이후 본문에서는 괄호 안의 약어를 사용한다.</p>
+<ul>
+<li>Artificial Intelligence (AI): 사람의 지각, 추론, 학습, 의사결정 능력을 기계가 수행하도록 만드는 인공지능 분야를 뜻한다.</li>
+<li>Application Programming Interface (API): 소프트웨어 모듈이나 robot primitive를 외부에서 호출하기 위한 함수/규약 interface이다.</li>
+<li>Large Language Model (LLM): 대규모 텍스트 데이터로 학습되어 언어 이해, 생성, 추론, 계획에 쓰이는 foundation model이다.</li>
+<li>Vision-Language Model (VLM): 이미지와 텍스트를 함께 입력받아 시각-언어 이해나 생성 작업을 수행하는 모델이다.</li>
+<li>Vision-Language-Action (VLA): 시각 관측과 언어 명령을 함께 받아 로봇 action까지 생성하는 모델 또는 학습 패러다임이다.</li>
+<li>Multi-Layer Perceptron (MLP): fully connected layer를 여러 층 쌓은 feed-forward neural network이다.</li>
+<li>Robotics Transformer (RT): robot observation을 입력받아 action을 예측하는 transformer 기반 robot policy 계열을 뜻한다.</li>
+<li>Robotics Transformer 1 (RT-1): Google의 실제 로봇 demonstration data로 학습한 transformer 기반 robot control policy이다.</li>
+<li>Robotics Transformer 2 (RT-2): web-scale vision-language knowledge와 robot trajectory를 함께 학습해 action token을 생성하는 VLA 모델이다.</li>
+<li>Robotics Transformer-X model family (RT-X): Open X-Embodiment 데이터 위에서 여러 robot embodiment로 확장한 RT 계열 policy family를 뜻한다.</li>
+<li>Robotics Transformer 1-X (RT-1-X): Open X-Embodiment 데이터로 확장 학습한 RT-1 계열 cross-embodiment policy이다.</li>
+<li>Robotics Transformer 2-X (RT-2-X): Open X-Embodiment 데이터로 확장 학습한 RT-2 계열 cross-embodiment VLA policy이다.</li>
+<li>Distributed Robot Interaction Dataset (DROID): 여러 장소에서 수집한 in-the-wild robot manipulation demonstration dataset이다.</li>
+<li>A Low-cost Open-source Hardware System for Bimanual Teleoperation (ALOHA): 저비용 양팔 teleoperation hardware와 imitation learning setup을 뜻한다.</li>
+<li>Physical Intelligence pi-zero model (pi0): Physical Intelligence가 제안한 general robot control용 vision-language-action flow model이다.</li>
+<li>Physical Intelligence pi-zero-point-five model (pi0.5): pi0를 open-world household manipulation으로 확장한 VLA model이다.</li>
+<li>Graphics Processing Unit (GPU): 대규모 neural network 학습과 병렬 연산을 빠르게 수행하는 processor이다.</li>
+<li>Video Random Access Memory (VRAM): GPU가 tensor, model parameter, activation을 저장하는 전용 memory이다.</li>
+<li>Toyota Research Institute (TRI): Toyota의 AI, robotics, mobility 연구기관이다.</li>
+<li>Physical Artificial Intelligence (Physical AI): 디지털 공간의 예측을 넘어 물리 세계에서 지각, 예측, 계획, 행동, 안전 검사를 수행하는 AI 시스템을 뜻한다.</li>
+</ul>
+<h2 id="1-metadata">1. Metadata<a class="headerlink" href="#1-metadata" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td><code>D5</code></td>
+</tr>
+<tr>
+<td>Title</td>
+<td>OpenVLA: An Open-Source Vision-Language-Action Model</td>
+</tr>
+<tr>
+<td>Authors</td>
+<td>Moo Jin Kim, Karl Pertsch, Siddharth Karamcheti, Ted Xiao et al.</td>
+</tr>
+<tr>
+<td>Affiliation / Team</td>
+<td>Stanford / UC Berkeley / TRI / Google DeepMind / Physical Intelligence / MIT</td>
+</tr>
+<tr>
+<td>Venue / Status</td>
+<td>CoRL / arXiv</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2024-06-13</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>https://arxiv.org/abs/2406.09246</td>
+</tr>
+<tr>
+<td>Local source</td>
+<td><code>paper_corpus/sources/D5</code></td>
+</tr>
+<tr>
+<td>Source figures</td>
+<td><code>paper_corpus/figures_source/D5/manifest.md</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 핵심 요약<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 7B parameter open-source Vision-Language-Action model이다. Open X-Embodiment에서 curated한 970K real-world robot episodes로 Prismatic-7B VLM을 robot action prediction에 fine-tuning하여, image observation과 language instruction을 입력받고 7-dimensional robot control action을 token sequence로 출력한다.</p>
+<p>RT-2/RT-2-X가 VLA 패러다임을 강하게 보여줬지만 closed model이었다면, OpenVLA는 VLA를 공개 checkpoint, PyTorch training code, fine-tuning notebook, HuggingFace workflow까지 포함한 open ecosystem으로 만든 것이 핵심 기여다.</p>
+<h2 id="3">3. 왜 중요한가?<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 Physical AI에서 연구자들이 직접 실험 가능한 open-source VLA의 대표 출발점이다.</p>
+<ul>
+<li>7B parameter open-source VLA로, closed RT-2-X 55B보다 훨씬 작다.</li>
+<li>Open X-Embodiment 기반 970K robot episodes로 학습했다.</li>
+<li>DINOv2 + SigLIP fused vision encoder와 Llama 2 backbone을 사용한다.</li>
+<li>WidowX와 Google Robot 평가에서 RT-2-X, RT-1-X, Octo와 비교해 강한 generalist manipulation 성능을 보였다.</li>
+<li>LoRA fine-tuning과 4-bit quantization을 통해 VLA를 더 접근 가능한 형태로 배포하는 방법을 제시했다.</li>
+<li>이후 SpatialVLA, CogACT, pi0 계열 등 open VLA 연구의 중요한 baseline이 된다.</li>
+</ul>
+<h2 id="4">4. 전체 개념<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 “VLM을 robot action generator로 fine-tuning한다”는 RT-2의 아이디어를 open-source로 구현한다. image와 instruction을 넣으면, LLM vocabulary 안의 action token을 autoregressive하게 생성하고, 이를 continuous robot control command로 변환한다.</p>
+<p align="center">
+  <img src="../../figures_source/D5/D5_srcfig_01_openvla_teaser.png" width="760">
+</p>
+<p align="center"><em>Figure 1. OpenVLA는 Open X-Embodiment의 970K robot episodes로 학습된 7B open-source VLA다. 여러 robot을 out-of-the-box로 제어하고, 새로운 robot domain에 parameter-efficient fine-tuning으로 빠르게 적응할 수 있다. Source figure: <code>openvla_teaser.pdf</code>.</em></p>
+
+<p>발표에서는 이 그림을 통해 다음을 강조하면 좋다.</p>
+<ul>
+<li>OpenVLA는 단순 논문 모델이 아니라 공개 checkpoint/code/fine-tuning workflow를 포함한 연구 platform이다.</li>
+<li>RT-2-X보다 작지만, curated data와 architecture choice로 strong generalist policy 성능을 보인다.</li>
+<li>중요한 사용 시나리오는 <code>out-of-the-box control</code>과 <code>new robot/task fine-tuning</code> 두 가지다.</li>
+</ul>
+<h2 id="5-model-architecture">5. Model Architecture<a class="headerlink" href="#5-model-architecture" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 Prismatic-7B VLM을 기반으로 한다. 구조는 세 부분으로 나뉜다.</p>
+<p align="center">
+  <img src="../../figures_source/D5/D5_srcfig_02_openvla_model.png" width="740">
+</p>
+<p align="center"><em>Figure 2. OpenVLA architecture. image observation과 language instruction을 입력받아 7-dimensional robot control action을 예측한다. vision encoder는 DINOv2와 SigLIP feature를 결합하고, projector가 visual feature를 Llama 2 embedding space로 보낸다. Source figure: <code>openvla_model.pdf</code>.</em></p>
+
+<table>
+<thead>
+<tr>
+<th>구성</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vision encoder</td>
+<td>DINOv2 + SigLIP pretrained feature를 channel-wise concatenation</td>
+</tr>
+<tr>
+<td>Projector</td>
+<td>visual feature를 LLM input embedding space로 mapping하는 2-layer MLP</td>
+</tr>
+<tr>
+<td>LLM backbone</td>
+<td>Llama 2 7B</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>image observation + natural language instruction</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>discretized robot action token sequence</td>
+</tr>
+<tr>
+<td>Training data</td>
+<td>Open X-Embodiment 기반 970K robot episodes</td>
+</tr>
+</tbody>
+</table>
+<p>OpenVLA가 DINOv2와 SigLIP을 함께 쓰는 이유는 semantic feature와 spatial feature를 모두 활용하기 위해서다. 논문은 DINOv2 feature가 robot control에 필요한 fine-grained spatial reasoning에 도움이 될 수 있다고 설명한다.</p>
+<h2 id="6-action-tokenization">6. Action Tokenization<a class="headerlink" href="#6-action-tokenization" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 continuous robot action을 LLM이 생성할 수 있는 discrete action token으로 바꾼다. 각 action dimension을 256개 bin으로 discretize하고, Llama tokenizer vocabulary의 least-used 256 token을 action token으로 덮어쓴다.</p>
+<div class="arithmatex">\[
+\tilde{a}_{t,j}
+=
+\mathrm{bin}_{256}(a_{t,j}; q_{1,j}, q_{99,j})
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(a_{t,j}\)</span></td>
+<td>timestep <span class="arithmatex">\(t\)</span>에서 <span class="arithmatex">\(j\)</span>번째 continuous robot action dimension</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tilde{a}_{t,j}\)</span></td>
+<td>discretization 후 생성되는 action token index</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathrm{bin}_{256}\)</span></td>
+<td>값을 256개 discrete bin 중 하나로 변환하는 함수</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(q_{1,j}\)</span></td>
+<td>training data에서 <span class="arithmatex">\(j\)</span>번째 action dimension의 1st percentile quantile</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(q_{99,j}\)</span></td>
+<td>training data에서 <span class="arithmatex">\(j\)</span>번째 action dimension의 99th percentile quantile</td>
+</tr>
+</tbody>
+</table>
+<p>RT-2는 min-max bounds를 사용했지만, OpenVLA는 1st/99th quantile을 사용한다. 이는 outlier action 때문에 discretization interval이 과도하게 넓어져 action resolution이 낮아지는 문제를 줄이기 위한 선택이다.</p>
+<h2 id="7-next-token-action-prediction-objective">7. Next-Token Action Prediction Objective<a class="headerlink" href="#7-next-token-action-prediction-objective" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 action prediction을 vision-language task처럼 다룬다. image observation과 instruction을 조건으로 action token sequence를 예측하고, action token에 대해서만 cross-entropy loss를 계산한다.</p>
+<div class="arithmatex">\[
+\mathcal{L}(\theta)
+=
+-
+\sum_{(o,l,a) \in \mathcal{D}}
+\sum_{j=1}^{N}
+\log p_{\theta}(\tilde{a}_{j} \mid o, l, \tilde{a}_{&lt;j})
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathcal{L}(\theta)\)</span></td>
+<td>OpenVLA fine-tuning loss</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\theta\)</span></td>
+<td>OpenVLA model parameter</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathcal{D}\)</span></td>
+<td>curated OpenX robot demonstration dataset</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(o\)</span></td>
+<td>image observation</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(l\)</span></td>
+<td>natural language task instruction</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\)</span></td>
+<td>continuous robot action</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tilde{a}_{j}\)</span></td>
+<td><span class="arithmatex">\(j\)</span>번째 discretized action token</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(N\)</span></td>
+<td>action dimension 수</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tilde{a}_{&lt;j}\)</span></td>
+<td>이전 action token context</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(p_{\theta}\)</span></td>
+<td>observation과 instruction을 조건으로 action token을 생성하는 model distribution</td>
+</tr>
+</tbody>
+</table>
+<p>이 수식은 OpenVLA가 “robot policy를 language model의 token generation 문제로 바꾼다”는 점을 보여준다. RT-2와 같은 VLA 패러다임이지만, OpenVLA는 open backbone과 open training pipeline으로 이를 재현 가능하게 만든다.</p>
+<h2 id="8-training-data-design-decisions">8. Training Data와 Design Decisions<a class="headerlink" href="#8-training-data-design-decisions" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 Open X-Embodiment를 그대로 모두 쓰지 않고, training에 적합하도록 curated mixture를 만든다.</p>
+<table>
+<thead>
+<tr>
+<th>Design decision</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dataset source</td>
+<td>Open X-Embodiment</td>
+</tr>
+<tr>
+<td>Final data size</td>
+<td>970K robot episodes</td>
+</tr>
+<tr>
+<td>Filtering</td>
+<td>manipulation dataset, 3rd-person camera, single-arm end-effector control 중심</td>
+</tr>
+<tr>
+<td>Mixture weighting</td>
+<td>Octo의 data mixture weight를 기반으로 dataset balance 조정</td>
+</tr>
+<tr>
+<td>DROID</td>
+<td>초기에는 일부 포함했지만 action token accuracy 문제로 final third training에서 제거</td>
+</tr>
+<tr>
+<td>Image resolution</td>
+<td>224x224 사용. 384x384는 3배 느리지만 성능 차이가 없었다고 보고</td>
+</tr>
+<tr>
+<td>Vision encoder</td>
+<td>frozen이 아니라 fine-tuning하는 것이 VLA 성능에 중요</td>
+</tr>
+<tr>
+<td>Training epochs</td>
+<td>final run은 27 epochs</td>
+</tr>
+<tr>
+<td>Training compute</td>
+<td>64 A100, 14일, batch size 2048</td>
+</tr>
+</tbody>
+</table>
+<p>이 논문에서 실무적으로 중요한 포인트는 VLA training이 일반 VLM fine-tuning과 다르다는 점이다. vision encoder를 freeze하는 VLM 관행과 달리, OpenVLA는 robot control을 위해 vision encoder fine-tuning이 중요하다고 보고한다.</p>
+<h2 id="9-direct-evaluation-generalist-robot-control">9. Direct Evaluation: Generalist Robot Control<a class="headerlink" href="#9-direct-evaluation-generalist-robot-control" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 WidowX BridgeData V2 환경과 Google Robot 환경에서 RT-1-X, RT-2-X, Octo와 비교된다.</p>
+<p><p align="center">
+  <img src="../../figures_source/D5/D5_srcfig_03_bridge_results.png" width="760">
+</p></p>
+<p align="center"><em>Figure 3. BridgeData V2 WidowX evaluation. OpenVLA는 visual, motion, physical, language grounding 등 여러 generalization category에서 강한 성능을 보이며, semantic generalization을 제외하면 RT-2-X보다 높은 성능을 보인다. Source figure: <code>bridge_results.pdf</code>.</em></p>
+
+<p align="center">
+  <img src="../../figures_source/D5/D5_srcfig_04_rt1_results.png" width="520">
+</p>
+<p align="center"><em>Figure 4. Google Robot evaluation. OpenVLA와 RT-2-X는 comparable performance를 보이며, RT-1-X와 Octo보다 전반적으로 높은 성능을 보인다. Source figure: <code>rt1_results.pdf</code>.</em></p>
+
+<p>핵심 결과는 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>비교</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenVLA vs RT-2-X</td>
+<td>OpenVLA는 7B로 RT-2-X 55B보다 작지만 BridgeData V2에서는 더 강하고 Google Robot에서는 comparable</td>
+</tr>
+<tr>
+<td>OpenVLA vs RT-1-X / Octo</td>
+<td>Internet-pretrained VLM 기반 VLA가 scratch-trained transformer policy보다 generalization에 강함</td>
+</tr>
+<tr>
+<td>Semantic generalization</td>
+<td>RT-2-X가 더 강한데, 이는 더 큰 Internet pretraining과 co-fine-tuning 때문으로 해석</td>
+</tr>
+<tr>
+<td>Language grounding</td>
+<td>distractor가 있는 multi-object scene에서 correct object manipulation이 중요</td>
+</tr>
+</tbody>
+</table>
+<p>논문은 OpenVLA가 RT-2-X보다 7배 적은 parameter로, 29개 task와 multiple embodiments에서 RT-2-X보다 16.5% absolute success rate가 높다고 보고한다.</p>
+<h2 id="10-fine-tuning-to-new-robot-setups">10. Fine-Tuning to New Robot Setups<a class="headerlink" href="#10-fine-tuning-to-new-robot-setups" title="Permanent link">&para;</a></h2>
+<p>OpenVLA의 또 다른 핵심 기여는 VLA fine-tuning을 본격적으로 평가한 것이다. 새 Franka robot setup에서 10-150 demonstrations만으로 fine-tuning하고, Diffusion Policy, Octo와 비교한다.</p>
+<p align="center">
+  <img src="../../figures_source/D5/D5_srcfig_05_finetune_results.png" width="760">
+</p>
+<p align="center"><em>Figure 5. New robot setup adaptation. OpenVLA는 7개 Franka task에서 fine-tuning되며, narrow single-instruction task에서는 Diffusion Policy가 강하지만, multi-instruction 및 distractor가 있는 diverse task에서는 generalist pretrained policy인 OpenVLA가 강하다. Source figure: <code>finetune_results.pdf</code>.</em></p>
+
+<p>fine-tuning 실험의 핵심 해석은 다음과 같다.</p>
+<ul>
+<li>Diffusion Policy는 좁고 단일 instruction인 dexterous task에서 여전히 강하다.</li>
+<li>OpenVLA와 Octo는 multiple objects와 language grounding이 필요한 diverse task에서 더 강하다.</li>
+<li>OpenVLA는 전체 평균에서 가장 높은 성능을 보이며, 모든 tested task에서 최소 50% success rate를 넘긴 유일한 방법이라고 보고된다.</li>
+<li>OpenVLA scratch, 즉 OpenX pretraining 없이 base Prismatic VLM만 fine-tuning한 경우 성능이 낮아 OpenX robot pretraining의 효과가 드러난다.</li>
+</ul>
+<h2 id="11-parameter-efficient-fine-tuning-quantization">11. Parameter-Efficient Fine-Tuning과 Quantization<a class="headerlink" href="#11-parameter-efficient-fine-tuning-quantization" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 full fine-tuning뿐 아니라 LoRA와 quantized inference도 평가한다. 이는 “VLA가 연구실/현장에서 실제로 쓰일 수 있는가?”와 직접 연결된다.</p>
+<p>LoRA는 linear layer에 low-rank update를 추가하는 방식으로 이해할 수 있다.</p>
+<div class="arithmatex">\[
+W^{\prime}
+=
+W + \Delta W,
+\quad
+\Delta W = BA
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(W\)</span></td>
+<td>pretrained model의 기존 weight matrix</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(W^{\prime}\)</span></td>
+<td>fine-tuning 후 effective weight</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Delta W\)</span></td>
+<td>LoRA가 추가하는 low-rank update</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A,B\)</span></td>
+<td>학습되는 low-rank matrix</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(r\)</span></td>
+<td>LoRA rank. 논문은 default <span class="arithmatex">\(r=32\)</span>를 추천</td>
+</tr>
+</tbody>
+</table>
+<p>논문에서 LoRA rank 32는 full fine-tuning과 유사한 성공률을 보이면서 전체 parameter의 1.4%만 학습한다. 이를 통해 single A100에서 10-15시간 안에 new task fine-tuning이 가능하다고 보고한다.</p>
+<p align="center">
+  <img src="../../figures_source/D5/D5_srcfig_06_inference_speed.png" width="620">
+</p>
+<p align="center"><em>Figure 6. OpenVLA inference speed. bfloat16과 int4 quantization은 높은 throughput을 보이며, int4는 GPU memory footprint를 크게 줄이면서 Bridge task success를 유지한다. Source figure: <code>inference_speed.pdf</code>.</em></p>
+
+<p>quantization 결과도 중요하다.</p>
+<table>
+<thead>
+<tr>
+<th>Precision</th>
+<th style="text-align: right;">Bridge Success</th>
+<th style="text-align: right;">VRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bfloat16</td>
+<td style="text-align: right;">71.3 ± 4.8%</td>
+<td style="text-align: right;">16.8 GB</td>
+</tr>
+<tr>
+<td>int8</td>
+<td style="text-align: right;">58.1 ± 5.1%</td>
+<td style="text-align: right;">10.2 GB</td>
+</tr>
+<tr>
+<td>int4</td>
+<td style="text-align: right;">71.9 ± 4.7%</td>
+<td style="text-align: right;">7.0 GB</td>
+</tr>
+</tbody>
+</table>
+<p>int8은 inference speed가 느려져 control dynamics가 바뀌며 성능이 떨어졌고, int4는 memory transfer 감소 덕분에 더 실용적인 trade-off를 보였다.</p>
+<h2 id="12-d1-open-x-embodiment">12. D1 Open X-Embodiment와의 연결<a class="headerlink" href="#12-d1-open-x-embodiment" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 D1의 문제의식을 실제 open-source model로 이어받는다.</p>
+<table>
+<thead>
+<tr>
+<th>D1 Open X-Embodiment</th>
+<th>D5 OpenVLA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cross-embodiment data repository 구축</td>
+<td>curated OpenX mixture 970K episodes로 VLA 학습</td>
+</tr>
+<tr>
+<td>RT-1-X / RT-2-X로 positive transfer 입증</td>
+<td>공개 VLA checkpoint/code/fine-tuning workflow 제공</td>
+</tr>
+<tr>
+<td>RT-2-X는 closed model</td>
+<td>OpenVLA는 open-source 7B model</td>
+</tr>
+<tr>
+<td>data scaling의 가능성 제시</td>
+<td>model adaptation과 accessibility까지 실험</td>
+</tr>
+<tr>
+<td>cross-embodiment learning infrastructure</td>
+<td>downstream robot setup fine-tuning recipe</td>
+</tr>
+</tbody>
+</table>
+<p>즉, D1은 데이터와 RT-X 실험으로 field를 열었고, D5는 연구자들이 실제로 사용할 수 있는 open VLA baseline을 제공한다.</p>
+<h2 id="13-world-model">13. World Model 관점에서의 위치<a class="headerlink" href="#13-world-model" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 명시적인 world model을 학습하지 않는다. future observation prediction, latent dynamics, planning rollout은 없다. 그러나 Physical AI와 World Model 스터디에서 중요한 이유는 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>관점</th>
+<th>OpenVLA의 의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action-as-language</td>
+<td>robot action을 LLM token generation으로 다룬다.</td>
+</tr>
+<tr>
+<td>pretrained visual-language prior</td>
+<td>Internet-scale VLM의 semantic/spatial prior를 robot control로 transfer한다.</td>
+</tr>
+<tr>
+<td>physical data scaling</td>
+<td>OpenX robot demonstrations를 VLA fine-tuning data로 사용한다.</td>
+</tr>
+<tr>
+<td>open-source baseline</td>
+<td>VLA 연구를 closed API가 아니라 reproducible research 대상으로 만든다.</td>
+</tr>
+<tr>
+<td>한계</td>
+<td>environment dynamics를 내부 model로 예측하지 않고 reactive policy처럼 action을 생성한다.</td>
+</tr>
+</tbody>
+</table>
+<p>따라서 OpenVLA는 world model이라기보다, open-source VLA policy foundation이다. 하지만 이후 world-model-based VLA나 action planning model을 만들 때 비교 기준이 되는 중요한 baseline이다.</p>
+<h2 id="14">14. 한계<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>한계</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>single-image observation</td>
+<td>multi-camera, wrist camera, proprioception, observation history를 기본적으로 지원하지 않는다.</td>
+</tr>
+<tr>
+<td>inference throughput</td>
+<td>high-frequency control setup, 예: ALOHA 50Hz에는 아직 느리다.</td>
+</tr>
+<tr>
+<td>reliability</td>
+<td>prior model보다 강하지만 tested task에서 항상 90% 이상 success를 보장하지는 않는다.</td>
+</tr>
+<tr>
+<td>dexterous control</td>
+<td>Diffusion Policy가 narrow dexterous task에서는 더 smooth/precise할 수 있다.</td>
+</tr>
+<tr>
+<td>design questions 미해결</td>
+<td>base VLM size, co-training with web data, best visual features 등은 더 연구가 필요하다.</td>
+</tr>
+<tr>
+<td>robot dynamics modeling 부재</td>
+<td>action chunking, temporal smoothing, dynamics-aware planning은 기본 구조에 포함되지 않는다.</td>
+</tr>
+</tbody>
+</table>
+<p>논문은 특히 action chunking이나 speculative decoding 등 inference-time optimization이 향후 중요하다고 논의한다.</p>
+<h2 id="15">15. 후속 연구와 연결<a class="headerlink" href="#15" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>후속 흐름</th>
+<th>연결</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SpatialVLA</td>
+<td>OpenVLA의 spatial representation 한계를 보완하려는 흐름</td>
+</tr>
+<tr>
+<td>CogACT</td>
+<td>VLA의 cognition/action module 분리와 action modeling 개선</td>
+</tr>
+<tr>
+<td>CoT-VLA</td>
+<td>VLA에 visual reasoning과 chain-of-thought를 추가</td>
+</tr>
+<tr>
+<td>pi0 / pi0.5</td>
+<td>action token generation을 넘어 flow/diffusion-style continuous action generation으로 확장</td>
+</tr>
+<tr>
+<td>Octo</td>
+<td>open-source generalist policy baseline, OpenVLA fine-tuning 비교 대상</td>
+</tr>
+<tr>
+<td>DROID / in-the-wild data</td>
+<td>OpenVLA가 일부 시도했지만 충분히 흡수하지 못한 richer real-world data scaling 방향</td>
+</tr>
+</tbody>
+</table>
+<h2 id="16">16. 발표 구성 추천<a class="headerlink" href="#16" title="Permanent link">&para;</a></h2>
+<ol>
+<li><code>문제의식</code>: RT-2-X는 강하지만 closed이고, VLA fine-tuning practice가 부족했다.</li>
+<li><code>핵심 모델</code>: DINOv2+SigLIP vision encoder, projector, Llama 2 7B backbone 구조를 설명한다.</li>
+<li><code>수식</code>: action discretization과 next-token action prediction objective를 설명한다.</li>
+<li><code>데이터</code>: OpenX curated 970K episodes와 design choices를 D1과 연결한다.</li>
+<li><code>평가</code>: WidowX/Google Robot direct evaluation에서 RT-2-X, RT-1-X, Octo와 비교한다.</li>
+<li><code>fine-tuning</code>: Franka setup에서 Diffusion Policy/Octo와 비교하고 어떤 task에서 강한지 설명한다.</li>
+<li><code>실용성</code>: LoRA, quantization, inference speed를 통해 open VLA의 실제 사용 가능성을 논의한다.</li>
+</ol>
+<h2 id="17">17. 발표 질문<a class="headerlink" href="#17" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OpenVLA가 RT-2-X보다 작으면서 강한 이유는 data curation, architecture, evaluation setup 중 무엇이 가장 클까?</li>
+<li>action을 LLM token으로 생성하는 방식은 continuous control에서 어떤 한계를 갖는가?</li>
+<li>OpenVLA는 Diffusion Policy보다 항상 나은가, 아니면 language grounding이 필요한 task에서 특히 강한가?</li>
+<li>VLA fine-tuning에서 vision encoder를 freeze하지 않는 것이 왜 중요한가?</li>
+<li>open-source VLA가 physical AI 연구 생태계에 주는 가장 큰 변화는 무엇인가?</li>
+</ul>
+<h2 id="18">18. 요약 코멘트<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<p>OpenVLA는 RT-2류 VLA를 공개 연구 생태계로 가져온 논문이다. D1 Open X-Embodiment가 cross-embodiment robot data foundation을 만들었다면, OpenVLA는 그 데이터를 사용해 실제로 배포/수정/ fine-tuning 가능한 7B VLA baseline을 제공한다. World model은 아니지만, 이후 Physical AI 연구에서 “open generalist VLA policy”의 기준점으로 읽어야 한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.instant", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/site.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
