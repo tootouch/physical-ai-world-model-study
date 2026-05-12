@@ -15,28 +15,36 @@ not_in_nav: |
 theme:
   name: material
   language: ko
+  logo: material/robot-industrial
+  favicon: assets/images/favicon.png
   features:
     - navigation.tabs
     - navigation.sections
     - navigation.indexes
     - navigation.top
+    - navigation.instant
+    - navigation.tracking
     - toc.follow
     - search.suggest
     - search.highlight
     - content.code.copy
+    - content.tabs.link
   palette:
     - scheme: default
-      primary: blue grey
-      accent: teal
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
         name: 다크 모드로 전환
     - scheme: slate
-      primary: blue grey
-      accent: teal
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
         name: 라이트 모드로 전환
+  font:
+    text: Noto Sans KR
+    code: JetBrains Mono
 
 nav:
   - Home: index.md
@@ -141,3 +149,6 @@ plugins:
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
