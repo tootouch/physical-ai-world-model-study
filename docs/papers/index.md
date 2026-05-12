@@ -1,11 +1,11 @@
-# Paper Collections
+# Paper Atlas
 
-This page reorganizes the curated notes as a reading system rather than a flat file list. Each note contains a short glossary, paper metadata, figure references, equations or notation where relevant, key findings, limitations, and discussion points.
+논문을 단순 목록이 아니라 연구 지형도로 볼 수 있도록 재배치했습니다. 각 note는 glossary, metadata, figure, equation/notation, 핵심 아이디어, 한계, 토론 포인트를 중심으로 읽도록 구성되어 있습니다.
 
 <div class="collection-overview">
-  <div><strong>59</strong><span>notes</span></div>
+  <div><strong>59</strong><span>paper notes</span></div>
   <div><strong>8</strong><span>collections</span></div>
-  <div><strong>30</strong><span>study sessions</span></div>
+  <div><strong>30</strong><span>sessions</span></div>
 </div>
 
 ## Survey

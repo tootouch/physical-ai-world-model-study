@@ -15,8 +15,9 @@ not_in_nav: |
 theme:
   name: material
   language: ko
-  logo: material/robot-industrial
-  favicon: assets/images/favicon.png
+  favicon: assets/images/favicon.svg
+  icon:
+    logo: material/robot-industrial
   features:
     - navigation.tabs
     - navigation.sections
@@ -43,8 +44,8 @@ theme:
         icon: material/weather-sunny
         name: 라이트 모드로 전환
   font:
-    text: Noto Sans KR
-    code: JetBrains Mono
+    text: IBM Plex Sans KR
+    code: IBM Plex Mono
 
 nav:
   - Home: index.md
@@ -147,6 +148,7 @@ plugins:
         - en
 
 extra_javascript:
+  - javascripts/site.js
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
